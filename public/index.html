@@ -66,6 +66,7 @@
         border: 1px solid var(--border);
         border-radius: 10px;
         overflow: hidden;
+        margin-bottom: 28px;
     }
     th, td {
         padding: 10px 14px;
@@ -81,6 +82,22 @@
         background: #1b1f28;
     }
     tr:last-child td { border-bottom: none; }
+    .idx {
+        color: var(--muted);
+        font-family: ui-monospace, monospace;
+        width: 36px;
+        text-align: right;
+    }
+    .section-title {
+        font-size: 15px;
+        margin: 0 0 10px;
+        color: var(--text);
+    }
+    .section-count {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 400;
+    }
     .addr { font-family: ui-monospace, monospace; }
     .amount { font-weight: 600; color: var(--accent); white-space: nowrap; }
     .memo { color: var(--muted); max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
@@ -116,8 +133,8 @@
 <div class="wrap">
     <h1>Поступления USDCASH на 4store.pcash</h1>
     <div class="subtitle">
-        Период: 2026-06-19 21:15 UTC — 2026-06-26 21:15 UTC ·
-        Сформировано: 2026-06-26 21:16:00 UTC
+        Период: 2026-06-19 21:21 UTC — 2026-06-26 21:21 UTC ·
+        Сформировано: 2026-06-26 21:22:25 UTC
     </div>
 
     
@@ -137,9 +154,11 @@
         </div>
     </div>
 
+    <h2 class="section-title">🥇 Капитаны <span class="section-count">(топ 24 по сумме)</span></h2>
     <table>
         <thead>
             <tr>
+                <th class="idx">#</th>
                 <th>Время (UTC)</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
@@ -149,70 +168,95 @@
         </thead>
         <tbody>
             
+        <tr>
+            <td class="idx">1</td>
+            <td>2026-06-24T15:11:42.500</td>
+            <td class="addr">ejovik.pcash </td>
+            <td class="amount">45.9140 USDCASH</td>
+            <td class="memo">order_id: 475c887d-d226-482f-8fde-9ae26e34c482</td>
+            <td class="tx"><code>13e9a869f90e…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">2</td>
+            <td>2026-06-22T13:54:22.000</td>
+            <td class="addr">abxypr.pcash </td>
+            <td class="amount">40.9900 USDCASH</td>
+            <td class="memo">order_id: 58b24078-5bb8-4264-a018-c58ad622d385</td>
+            <td class="tx"><code>1d6c3b919034…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">3</td>
+            <td>2026-06-24T14:24:25.500</td>
+            <td class="addr">gracsk.pcash </td>
+            <td class="amount">40.9900 USDCASH</td>
+            <td class="memo">order_id: c60a3e7b-600e-4912-9aab-3ba395d83f8d</td>
+            <td class="tx"><code>8df5844ddc29…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">4</td>
+            <td>2026-06-25T16:26:41.000</td>
+            <td class="addr">abycwc.pcash </td>
+            <td class="amount">38.0800 USDCASH</td>
+            <td class="memo">order_id: 0ef36fdc-efc9-4a3f-b07e-78590a9ed651</td>
+            <td class="tx"><code>b34edf4eea9d…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">5</td>
+            <td>2026-06-26T03:31:48.000</td>
+            <td class="addr">abydlw.pcash </td>
+            <td class="amount">34.6410 USDCASH</td>
+            <td class="memo">order_id: 8c09357c-e6cc-4ac6-af59-01ef0eec9aeb</td>
+            <td class="tx"><code>ac2518d9c494…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">6</td>
+            <td>2026-06-26T12:10:28.000</td>
+            <td class="addr">abxs41.pcash </td>
+            <td class="amount">31.9580 USDCASH</td>
+            <td class="memo">order_id: 09b48c2e-ebee-4a4d-8d83-d76a97159608</td>
+            <td class="tx"><code>2d191b25d322…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">7</td>
+            <td>2026-06-26T16:52:49.500</td>
+            <td class="addr">cobra5.pcash </td>
+            <td class="amount">30.5050 USDCASH</td>
+            <td class="memo">order_id: 0758a447-237d-4c48-89de-43933f678ebb</td>
+            <td class="tx"><code>e396d51d3944…</code></td>
+        </tr>
+        
+        <tr>
+            <td class="idx">8</td>
+            <td>2026-06-26T17:40:52.500</td>
+            <td class="addr">pmcelt.pcash </td>
+            <td class="amount">30.2570 USDCASH</td>
+            <td class="memo">order_id: 6fb54441-708a-47f8-8263-cf781676d89e</td>
+            <td class="tx"><code>0df75566438c…</code></td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+    <h2 class="section-title">🥈 Участники <span class="section-count">(следующие 120 по сумме)</span></h2>
+    <table>
+        <thead>
             <tr>
-                <td>2026-06-24T15:11:42.500</td>
-                <td class="addr">ejovik.pcash </td>
-                <td class="amount">45.9140 USDCASH</td>
-                <td class="memo">order_id: 475c887d-d226-482f-8fde-9ae26e34c482</td>
-                <td class="tx"><code>13e9a869f90e…</code></td>
+                <th class="idx">#</th>
+                <th>Время (UTC)</th>
+                <th>Отправитель</th>
+                <th>Сумма</th>
+                <th>Memo</th>
+                <th>TX</th>
             </tr>
-            
-            <tr>
-                <td>2026-06-22T13:54:22.000</td>
-                <td class="addr">abxypr.pcash </td>
-                <td class="amount">40.9900 USDCASH</td>
-                <td class="memo">order_id: 58b24078-5bb8-4264-a018-c58ad622d385</td>
-                <td class="tx"><code>1d6c3b919034…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-24T14:24:25.500</td>
-                <td class="addr">gracsk.pcash </td>
-                <td class="amount">40.9900 USDCASH</td>
-                <td class="memo">order_id: c60a3e7b-600e-4912-9aab-3ba395d83f8d</td>
-                <td class="tx"><code>8df5844ddc29…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-25T16:26:41.000</td>
-                <td class="addr">abycwc.pcash </td>
-                <td class="amount">38.0800 USDCASH</td>
-                <td class="memo">order_id: 0ef36fdc-efc9-4a3f-b07e-78590a9ed651</td>
-                <td class="tx"><code>b34edf4eea9d…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-26T03:31:48.000</td>
-                <td class="addr">abydlw.pcash </td>
-                <td class="amount">34.6410 USDCASH</td>
-                <td class="memo">order_id: 8c09357c-e6cc-4ac6-af59-01ef0eec9aeb</td>
-                <td class="tx"><code>ac2518d9c494…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-26T12:10:28.000</td>
-                <td class="addr">abxs41.pcash </td>
-                <td class="amount">31.9580 USDCASH</td>
-                <td class="memo">order_id: 09b48c2e-ebee-4a4d-8d83-d76a97159608</td>
-                <td class="tx"><code>2d191b25d322…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-26T16:52:49.500</td>
-                <td class="addr">cobra5.pcash </td>
-                <td class="amount">30.5050 USDCASH</td>
-                <td class="memo">order_id: 0758a447-237d-4c48-89de-43933f678ebb</td>
-                <td class="tx"><code>e396d51d3944…</code></td>
-            </tr>
-            
-            <tr>
-                <td>2026-06-26T17:40:52.500</td>
-                <td class="addr">pmcelt.pcash </td>
-                <td class="amount">30.2570 USDCASH</td>
-                <td class="memo">order_id: 6fb54441-708a-47f8-8263-cf781676d89e</td>
-                <td class="tx"><code>0df75566438c…</code></td>
-            </tr>
-            
+        </thead>
+        <tbody>
+            <tr><td colspan="6" class="empty">Поступлений в этой группе нет.</td></tr>
         </tbody>
     </table>
 
