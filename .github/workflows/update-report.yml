@@ -1,0 +1,44 @@
+name: Update USDCASH transfers report
+
+# Запуск:
+#  - вручную через кнопку "Run workflow" в вкладке Actions
+#  - программно через GitHub REST API (этим будет дёргать cron-job.org каждые 15 минут)
+#  - автоматически при пуше в main (удобно для проверки, что всё работает)
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+# Разрешаем workflow пушить коммиты обратно в репозиторий
+permissions:
+  contents: write
+
+# Не даём двум запускам работать одновременно (на случай, если предыдущий ещё не закончился)
+concurrency:
+  group: update-report
+  cancel-in-progress: false
+
+jobs:
+  update-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run monitor script
+        run: python monitor.py
+
+      - name: Commit and push updated report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/index.html
+          git diff --quiet --cached || git commit -m "Auto-update transfers report [skip ci]"
+          git push
