@@ -2,30 +2,225 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Поступления USDCASH — отчёт ещё не сформирован</title>
+<title>Поступления USDCASH на 4store.pcash</title>
 <style>
+    :root {
+        --bg: #0f1115;
+        --panel: #171a21;
+        --border: #262b35;
+        --text: #e6e8eb;
+        --muted: #8a8f98;
+        --accent: #4fd1c5;
+        --accent2: #f6ad55;
+    }
+    * { box-sizing: border-box; }
     body {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: #0f1115;
-        color: #e6e8eb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        text-align: center;
-        padding: 20px;
+        background: var(--bg);
+        color: var(--text);
+        padding: 32px 16px;
     }
-    .box { max-width: 480px; }
-    h1 { font-size: 20px; margin-bottom: 8px; }
-    p { color: #8a8f98; font-size: 14px; }
+    .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+    }
+    h1 {
+        font-size: 22px;
+        margin: 0 0 4px;
+    }
+    .subtitle {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+    .stats {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+    }
+    .stat-card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 18px;
+        min-width: 150px;
+    }
+    .stat-card .num {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent);
+    }
+    .stat-card .label {
+        font-size: 12px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    th, td {
+        padding: 10px 14px;
+        text-align: left;
+        font-size: 13px;
+        border-bottom: 1px solid var(--border);
+    }
+    th {
+        color: var(--muted);
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        background: #1b1f28;
+    }
+    tr:last-child td { border-bottom: none; }
+    .addr { font-family: ui-monospace, monospace; }
+    .amount { font-weight: 600; color: var(--accent); white-space: nowrap; }
+    .memo { color: var(--muted); max-width: 260px; overflow: hidden; text-overflow: ellipsis; }
+    .tx code { color: var(--muted); }
+    .badge {
+        display: inline-block;
+        background: var(--accent2);
+        color: #1a1a1a;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 1px 6px;
+        border-radius: 8px;
+        margin-left: 6px;
+    }
+    .empty { text-align: center; color: var(--muted); padding: 30px 0; }
+    .error-box {
+        background: #3a1f1f;
+        border: 1px solid #6b2c2c;
+        color: #ffb3b3;
+        padding: 14px 18px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .footer {
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 12px;
+    }
 </style>
 </head>
 <body>
-<div class="box">
-    <h1>Отчёт ещё не сформирован</h1>
-    <p>Эта страница будет автоматически заменена после первого запуска
-    GitHub Actions workflow (раз в 15 минут, или вручную через Run workflow).</p>
+<div class="wrap">
+    <h1>Поступления USDCASH на 4store.pcash</h1>
+    <div class="subtitle">
+        Период: 2026-06-19 20:58 UTC — 2026-06-26 20:58 UTC ·
+        Сформировано: 2026-06-26 20:59:13 UTC
+    </div>
+
+    
+
+    <div class="stats">
+        <div class="stat-card">
+            <div class="num">8</div>
+            <div class="label">Показано записей</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">8</div>
+            <div class="label">Уникальных адресов</div>
+        </div>
+        <div class="stat-card">
+            <div class="num">8</div>
+            <div class="label">Всего транзакций найдено</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Время (UTC)</th>
+                <th>Отправитель</th>
+                <th>Сумма</th>
+                <th>Memo</th>
+                <th>TX</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>2026-06-24T15:11:42.500</td>
+                <td class="addr">ejovik.pcash </td>
+                <td class="amount">45.9140 USDCASH</td>
+                <td class="memo">order_id: 475c887d-d226-482f-8fde-9ae26e34c482</td>
+                <td class="tx"><code>13e9a869f90e…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-22T13:54:22.000</td>
+                <td class="addr">abxypr.pcash </td>
+                <td class="amount">40.9900 USDCASH</td>
+                <td class="memo">order_id: 58b24078-5bb8-4264-a018-c58ad622d385</td>
+                <td class="tx"><code>1d6c3b919034…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-24T14:24:25.500</td>
+                <td class="addr">gracsk.pcash </td>
+                <td class="amount">40.9900 USDCASH</td>
+                <td class="memo">order_id: c60a3e7b-600e-4912-9aab-3ba395d83f8d</td>
+                <td class="tx"><code>8df5844ddc29…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-25T16:26:41.000</td>
+                <td class="addr">abycwc.pcash </td>
+                <td class="amount">38.0800 USDCASH</td>
+                <td class="memo">order_id: 0ef36fdc-efc9-4a3f-b07e-78590a9ed651</td>
+                <td class="tx"><code>b34edf4eea9d…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-26T03:31:48.000</td>
+                <td class="addr">abydlw.pcash </td>
+                <td class="amount">34.6410 USDCASH</td>
+                <td class="memo">order_id: 8c09357c-e6cc-4ac6-af59-01ef0eec9aeb</td>
+                <td class="tx"><code>ac2518d9c494…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-26T12:10:28.000</td>
+                <td class="addr">abxs41.pcash </td>
+                <td class="amount">31.9580 USDCASH</td>
+                <td class="memo">order_id: 09b48c2e-ebee-4a4d-8d83-d76a97159608</td>
+                <td class="tx"><code>2d191b25d322…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-26T16:52:49.500</td>
+                <td class="addr">cobra5.pcash </td>
+                <td class="amount">30.5050 USDCASH</td>
+                <td class="memo">order_id: 0758a447-237d-4c48-89de-43933f678ebb</td>
+                <td class="tx"><code>e396d51d3944…</code></td>
+            </tr>
+            
+            <tr>
+                <td>2026-06-26T17:40:52.500</td>
+                <td class="addr">pmcelt.pcash </td>
+                <td class="amount">30.2570 USDCASH</td>
+                <td class="memo">order_id: 6fb54441-708a-47f8-8263-cf781676d89e</td>
+                <td class="tx"><code>0df75566438c…</code></td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <div class="footer">
+        Источник данных: https://hyperion.paycash.online ·
+        Контракт токена: token.pcash ·
+        Диапазон суммы: (10, 60), круглые суммы (кратные 0.5) отброшены ·
+        Максимум 2 записей на один уникальный адрес · Сортировка: по сумме, по убыванию.
+    </div>
 </div>
 </body>
 </html>
