@@ -50,6 +50,9 @@ MAX_AMOUNT = 60                 # верхняя граница суммы (ст
 ROUND_STEP = 0.5                # суммы, кратные этому шагу, считаются "круглыми" и отбрасываются
 ROUND_EPSILON = 1e-6            # допуск на погрешность float-сравнения при проверке кратности
 
+TOP_GROUP_SIZE = 24       # сколько самых крупных переводов попадает в группу "Капитаны"
+SECOND_GROUP_SIZE = 120   # сколько следующих по размеру переводов попадает в "Участники"
+
 # Публичные Hyperion-ноды. Первая в списке — нода от paycash (сервиса самого токена USDCASH),
 # остальные — общие публичные ноды EOS-сети как запасной вариант.
 HYPERION_ENDPOINTS = [
@@ -182,6 +185,34 @@ def try_endpoints(account, contract, action_name, after_iso, before_iso):
     return [], None, last_error
 
 
+def render_table(rows, empty_message):
+    """
+    Рендерит одну HTML-таблицу со сквозной нумерацией строк слева (#1, #2, ...).
+    rows — список словарей-переводов в нужном порядке.
+    """
+    if not rows:
+        return f'<tr><td colspan="6" class="empty">{escape(empty_message)}</td></tr>'
+
+    table_rows = ""
+    for i, r in enumerate(rows, start=1):
+        dup_badge = (
+            f'<span class="badge">#{r["seq_for_address"]}</span>'
+            if r["seq_for_address"] > 1
+            else ""
+        )
+        table_rows += f"""
+        <tr>
+            <td class="idx">{i}</td>
+            <td>{escape(r['timestamp'] or '—')}</td>
+            <td class="addr">{escape(r['from'])} {dup_badge}</td>
+            <td class="amount">{r['amount']:.4f} {escape(r['symbol'])}</td>
+            <td class="memo">{escape(r['memo'] or '')}</td>
+            <td class="tx"><code>{escape(r['trx_id'][:12])}…</code></td>
+        </tr>
+        """
+    return table_rows
+
+
 def build_html(rows, period_start, period_end, used_endpoint, error_message, total_raw_count):
     """Собирает итоговую HTML-страницу из подготовленных строк."""
 
@@ -197,25 +228,11 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
     else:
         body_extra = ""
 
-    table_rows = ""
-    if rows:
-        for r in rows:
-            dup_badge = (
-                f'<span class="badge">#{r["seq_for_address"]}</span>'
-                if r["seq_for_address"] > 1
-                else ""
-            )
-            table_rows += f"""
-            <tr>
-                <td>{escape(r['timestamp'] or '—')}</td>
-                <td class="addr">{escape(r['from'])} {dup_badge}</td>
-                <td class="amount">{r['amount']:.4f} {escape(r['symbol'])}</td>
-                <td class="memo">{escape(r['memo'] or '')}</td>
-                <td class="tx"><code>{escape(r['trx_id'][:12])}…</code></td>
-            </tr>
-            """
-    else:
-        table_rows = '<tr><td colspan="5" class="empty">Поступлений USDCASH за этот период не найдено.</td></tr>'
+    captains_rows = rows[:TOP_GROUP_SIZE]
+    members_rows = rows[TOP_GROUP_SIZE:TOP_GROUP_SIZE + SECOND_GROUP_SIZE]
+
+    captains_table = render_table(captains_rows, "Поступлений в этой группе нет.")
+    members_table = render_table(members_rows, "Поступлений в этой группе нет.")
 
     unique_addresses = len({r["from"] for r in rows})
 
@@ -287,6 +304,7 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         border: 1px solid var(--border);
         border-radius: 10px;
         overflow: hidden;
+        margin-bottom: 28px;
     }}
     th, td {{
         padding: 10px 14px;
@@ -302,6 +320,22 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         background: #1b1f28;
     }}
     tr:last-child td {{ border-bottom: none; }}
+    .idx {{
+        color: var(--muted);
+        font-family: ui-monospace, monospace;
+        width: 36px;
+        text-align: right;
+    }}
+    .section-title {{
+        font-size: 15px;
+        margin: 0 0 10px;
+        color: var(--text);
+    }}
+    .section-count {{
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 400;
+    }}
     .addr {{ font-family: ui-monospace, monospace; }}
     .amount {{ font-weight: 600; color: var(--accent); white-space: nowrap; }}
     .memo {{ color: var(--muted); max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
@@ -358,9 +392,11 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         </div>
     </div>
 
+    <h2 class="section-title">🥇 Капитаны <span class="section-count">(топ {TOP_GROUP_SIZE} по сумме)</span></h2>
     <table>
         <thead>
             <tr>
+                <th class="idx">#</th>
                 <th>Время (UTC)</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
@@ -369,7 +405,24 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
             </tr>
         </thead>
         <tbody>
-            {table_rows}
+            {captains_table}
+        </tbody>
+    </table>
+
+    <h2 class="section-title">🥈 Участники <span class="section-count">(следующие {SECOND_GROUP_SIZE} по сумме)</span></h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="idx">#</th>
+                <th>Время (UTC)</th>
+                <th>Отправитель</th>
+                <th>Сумма</th>
+                <th>Memo</th>
+                <th>TX</th>
+            </tr>
+        </thead>
+        <tbody>
+            {members_table}
         </tbody>
     </table>
 
