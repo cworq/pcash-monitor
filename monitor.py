@@ -223,6 +223,7 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="/favicon.png">
 <title>Поступления USDCASH на {escape(ACCOUNT)}</title>
 <style>
     :root {{
