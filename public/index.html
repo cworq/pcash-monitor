@@ -13,6 +13,7 @@
         --muted: #8a8f98;
         --accent: #4fd1c5;
         --accent2: #f6ad55;
+        --danger: #f66464;
     }
     * { box-sizing: border-box; }
     body {
@@ -53,6 +54,7 @@
         font-weight: 700;
         color: var(--accent);
     }
+    .stat-card .num.warn { color: var(--accent2); }
     .stat-card .label {
         font-size: 12px;
         color: var(--muted);
@@ -66,7 +68,7 @@
         border: 1px solid var(--border);
         border-radius: 10px;
         overflow: hidden;
-        margin-bottom: 28px;
+        margin-bottom: 12px;
     }
     th, td {
         padding: 10px 14px;
@@ -85,8 +87,9 @@
     .idx {
         color: var(--muted);
         font-family: ui-monospace, monospace;
-        width: 36px;
+        width: 48px;
         text-align: right;
+        white-space: nowrap;
     }
     .section-title {
         font-size: 15px;
@@ -112,6 +115,28 @@
         border-radius: 8px;
         margin-left: 6px;
     }
+    tr.suspicious td { background: rgba(246, 100, 100, 0.07); }
+    tr.suspicious .amount { color: var(--accent2); }
+    tr.suspicious .idx { color: var(--accent2); }
+    .susp-legend {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 20px;
+        padding: 8px 12px;
+        background: rgba(246, 100, 100, 0.07);
+        border-left: 3px solid var(--accent2);
+        border-radius: 4px;
+    }
+    .remainder {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+        padding: 14px;
+        border: 1px dashed var(--border);
+        border-radius: 10px;
+        margin-bottom: 28px;
+    }
+    .remainder strong { color: var(--text); }
     .empty { text-align: center; color: var(--muted); padding: 30px 0; }
     .error-box {
         background: #3a1f1f;
@@ -133,8 +158,8 @@
 <div class="wrap">
     <h1>Поступления USDCASH на 4store.pcash</h1>
     <div class="subtitle">
-        Период: 2026-07-03 21:30 UTC — 2026-07-10 21:30 UTC ·
-        Сформировано: 2026-07-10 21:31:42 UTC
+        Период: 2026-07-04 02:45 (UTC+5) — 2026-07-11 02:45 (UTC+5) ·
+        Сформировано: 2026-07-11 02:46:08 (UTC+5)
     </div>
 
     
@@ -152,14 +177,20 @@
             <div class="num">4</div>
             <div class="label">Всего транзакций найдено</div>
         </div>
+        <div class="stat-card">
+            <div class="num warn">0</div>
+            <div class="label">⚠️ Подозрительных</div>
+        </div>
     </div>
+
+    
 
     <h2 class="section-title">🥇 Капитаны <span class="section-count">(топ 24 по сумме)</span></h2>
     <table>
         <thead>
             <tr>
                 <th class="idx">#</th>
-                <th>Время (UTC)</th>
+                <th>Время (UTC+5)</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
                 <th>Memo</th>
@@ -170,7 +201,7 @@
             
         <tr>
             <td class="idx">1</td>
-            <td>2026-07-06T05:29:39.000</td>
+            <td>2026-07-06 10:29 (UTC+5)</td>
             <td class="addr">diomir.pcash </td>
             <td class="amount">50.5100 USDCASH</td>
             <td class="memo">order_id: f0132d49-f1ba-4f50-91b7-6d783ada7634</td>
@@ -179,7 +210,7 @@
         
         <tr>
             <td class="idx">2</td>
-            <td>2026-07-08T16:32:45.000</td>
+            <td>2026-07-08 21:32 (UTC+5)</td>
             <td class="addr">igylsm.pcash </td>
             <td class="amount">42.3800 USDCASH</td>
             <td class="memo">order_id: 75b1560f-d3f9-4111-9080-a7fa83a5f153</td>
@@ -188,7 +219,7 @@
         
         <tr>
             <td class="idx">3</td>
-            <td>2026-07-10T10:55:43.000</td>
+            <td>2026-07-10 15:55 (UTC+5)</td>
             <td class="addr">mwmwmw.pcash </td>
             <td class="amount">41.1820 USDCASH</td>
             <td class="memo">order_id: c704ec83-2efa-4f10-84da-5f9d99a7b2f3</td>
@@ -197,7 +228,7 @@
         
         <tr>
             <td class="idx">4</td>
-            <td>2026-07-10T18:57:28.500</td>
+            <td>2026-07-10 23:57 (UTC+5)</td>
             <td class="addr">abxyzo.pcash </td>
             <td class="amount">38.6260 USDCASH</td>
             <td class="memo">order_id: 14eb89ee-553f-4ae2-8160-f3c2c86fa44d</td>
@@ -212,7 +243,7 @@
         <thead>
             <tr>
                 <th class="idx">#</th>
-                <th>Время (UTC)</th>
+                <th>Время (UTC+5)</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
                 <th>Memo</th>
@@ -223,6 +254,8 @@
             <tr><td colspan="6" class="empty">Поступлений в этой группе нет.</td></tr>
         </tbody>
     </table>
+
+    
 
     <div class="footer">
         Источник данных: https://hyperion.paycash.online ·
