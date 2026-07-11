@@ -1,4 +1,3 @@
-cat > /mnt/user-data/outputs/monitor.py << 'PYEOF'
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
