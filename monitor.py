@@ -101,6 +101,8 @@ def format_timestamp(timestamp_raw):
         return None
     try:
         dt = datetime.fromisoformat(timestamp_raw.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
         dt_local = dt + timedelta(hours=DISPLAY_UTC_OFFSET)
         return dt_local.strftime("%Y-%m-%d %H:%M") + f" (UTC+{DISPLAY_UTC_OFFSET})"
     except Exception:
@@ -168,6 +170,8 @@ def expected_price_at(timestamp_raw):
     try:
         auction_start = datetime.fromisoformat(AUCTION_START_UTC).replace(tzinfo=timezone.utc)
         tx_time = datetime.fromisoformat(timestamp_raw.replace("Z", "+00:00"))
+        if tx_time.tzinfo is None:
+            tx_time = tx_time.replace(tzinfo=timezone.utc)
         minutes = (tx_time - auction_start).total_seconds() / 60
         if minutes < 0:
             return None  # до старта редукциона
