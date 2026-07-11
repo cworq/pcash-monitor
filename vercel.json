@@ -1,4 +1,5 @@
 {
   "buildCommand": null,
-  "outputDirectory": "public"
+  "outputDirectory": "public",
+  "ignoreCommand": "exit 0"
 }
