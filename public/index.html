@@ -6,47 +6,22 @@
 <title>Поступления USDCASH на 4store.pcash</title>
 <style>
     :root {
-        --bg: #0f1115;
-        --panel: #171a21;
-        --border: #262b35;
-        --text: #e6e8eb;
-        --muted: #8a8f98;
-        --accent: #4fd1c5;
-        --accent2: #f6ad55;
-        --danger: #f66464;
+        --bg: #0f1115; --panel: #171a21; --border: #262b35;
+        --text: #e6e8eb; --muted: #8a8f98;
+        --accent: #4fd1c5; --accent2: #f6ad55; --danger: #f66464;
     }
     * { box-sizing: border-box; }
-    body {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        padding: 32px 16px;
-    }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 32px 16px; }
     .wrap { max-width: 1100px; margin: 0 auto; }
     h1 { font-size: 22px; margin: 0 0 4px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
     .stats { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
-    .stat-card {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 14px 18px;
-        min-width: 150px;
-    }
+    .stat-card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; min-width: 150px; }
     .stat-card .num { font-size: 24px; font-weight: 700; color: var(--accent); }
     .stat-card .num.warn { color: var(--accent2); }
     .stat-card .num.price { color: #b794f4; }
     .stat-card .label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        overflow: hidden;
-        margin-bottom: 12px;
-    }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
     th, td { padding: 10px 14px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }
     th { color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.04em; background: #1b1f28; }
     tr:last-child td { border-bottom: none; }
@@ -59,50 +34,16 @@
     .price { font-family: ui-monospace, monospace; font-size: 12px; white-space: nowrap; }
     .memo { color: var(--muted); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .tx code { color: var(--muted); font-size: 11px; }
-    .badge {
-        display: inline-block;
-        background: var(--accent2);
-        color: #1a1a1a;
-        font-size: 10px;
-        font-weight: 700;
-        padding: 1px 6px;
-        border-radius: 8px;
-        margin-left: 6px;
-    }
+    .badge { display: inline-block; background: var(--accent2); color: #1a1a1a; font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; margin-left: 6px; }
     tr.suspicious td { background: rgba(246, 100, 100, 0.07); }
     tr.suspicious .amount { color: var(--accent2); }
     tr.suspicious .idx { color: var(--danger); }
-    .susp-legend {
-        font-size: 12px;
-        color: var(--muted);
-        margin-bottom: 20px;
-        padding: 10px 14px;
-        background: rgba(246, 100, 100, 0.07);
-        border-left: 3px solid var(--accent2);
-        border-radius: 4px;
-        line-height: 1.7;
-    }
+    .susp-legend { font-size: 12px; color: var(--muted); margin-bottom: 20px; padding: 10px 14px; background: rgba(246, 100, 100, 0.07); border-left: 3px solid var(--accent2); border-radius: 4px; line-height: 1.7; }
     .susp-legend strong { color: var(--accent2); }
-    .remainder {
-        text-align: center;
-        color: var(--muted);
-        font-size: 13px;
-        padding: 14px;
-        border: 1px dashed var(--border);
-        border-radius: 10px;
-        margin-bottom: 28px;
-    }
+    .remainder { text-align: center; color: var(--muted); font-size: 13px; padding: 14px; border: 1px dashed var(--border); border-radius: 10px; margin-bottom: 28px; }
     .remainder strong { color: var(--text); }
     .empty { text-align: center; color: var(--muted); padding: 30px 0; }
-    .error-box {
-        background: #3a1f1f;
-        border: 1px solid #6b2c2c;
-        color: #ffb3b3;
-        padding: 14px 18px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-        font-size: 14px;
-    }
+    .error-box { background: #3a1f1f; border: 1px solid #6b2c2c; color: #ffb3b3; padding: 14px 18px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; }
     .footer { margin-top: 20px; color: var(--muted); font-size: 12px; line-height: 1.8; }
 </style>
 </head>
@@ -110,57 +51,43 @@
 <div class="wrap">
     <h1>Поступления USDCASH на 4store.pcash</h1>
     <div class="subtitle">
-        Период: 2026-07-05 03:33 (UTC+5) — 2026-07-12 03:33 (UTC+5) ·
-        Сформировано: 2026-07-12 03:34:41 (UTC+5)
+        Период: 2026-07-05 03:39 (UTC+5) — 2026-07-12 03:39 (UTC+5) ·
+        Сформировано: 2026-07-12 03:40:09 (UTC+5)
     </div>
-
     
-
     <div class="stats">
-        <div class="stat-card">
-            <div class="num">18</div>
-            <div class="label">Показано записей</div>
-        </div>
-        <div class="stat-card">
-            <div class="num">18</div>
-            <div class="label">Уникальных адресов</div>
-        </div>
-        <div class="stat-card">
-            <div class="num">18</div>
-            <div class="label">Всего транзакций найдено</div>
-        </div>
-        <div class="stat-card">
-            <div class="num warn">0</div>
-            <div class="label">⚠️ Подозрительных</div>
-        </div>
-        <div class="stat-card">
-            <div class="num price">$29.980</div>
-            <div class="label">Цена редукциона сейчас</div>
-        </div>
+        <div class="stat-card"><div class="num">18</div><div class="label">Показано записей</div></div>
+        <div class="stat-card"><div class="num">18</div><div class="label">Уникальных адресов</div></div>
+        <div class="stat-card"><div class="num">18</div><div class="label">Всего транзакций найдено</div></div>
+        <div class="stat-card"><div class="num warn">1</div><div class="label">⚠️ Подозрительных</div></div>
+        <div class="stat-card"><div class="num price">$29.952</div><div class="label">Цена редукциона сейчас</div></div>
     </div>
-
-    
-
+    <div class="susp-legend">
+            ⚠️ <strong>1 подозрительных</strong> — сумма взноса превышает
+            расчётную цену редукциона в момент транзакции более чем на $0.5.
+            Колонка <em>«Ожид. (откл.)»</em>: серая = ожидаемая цена, цветная = отклонение
+            (<span style="color:#4fd1c5">зелёный</span> = ниже нормы,
+            <span style="color:#f6ad55">оранжевый</span> = чуть выше,
+            <span style="color:#f66464">красный</span> = подозрительно).
+        </div>
     <h2 class="section-title">🥇 Капитаны <span class="section-count">(топ 24 по сумме)</span></h2>
     <table>
-        <thead>
-            <tr>
-                <th class="idx">#</th>
-                <th>Время (UTC+5)</th>
-                <th>Отправитель</th>
-                <th>Сумма</th>
-                <th>Ожид. (откл.)</th>
-                <th>Memo</th>
-                <th>TX</th>
-            </tr>
-        </thead>
+        <thead><tr>
+            <th class="idx">#</th>
+            <th>Время (UTC+5)</th>
+            <th>Отправитель</th>
+            <th>Сумма</th>
+            <th>Ожид. (откл.)</th>
+            <th>Memo</th>
+            <th>TX</th>
+        </tr></thead>
         <tbody>
         <tr>
             <td class="idx">1</td>
             <td class="ts">2026-07-06 10:29 (UTC+5)</td>
             <td class="addr">diomir.pcash </td>
             <td class="amount">50.5100 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">71.105</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-20.595)</span></td>
+            <td class="price"><span style="color:var(--muted)">71.105</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-20.595)</span></td>
             <td class="memo">order_id: f0132d49-f1ba-4f50-91b7-6d783ada7634</td>
             <td class="tx"><code>47450e5ec61f…</code></td>
         </tr>
@@ -170,17 +97,17 @@
             <td class="ts">2026-07-08 21:32 (UTC+5)</td>
             <td class="addr">igylsm.pcash </td>
             <td class="amount">42.3800 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">53.389</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-11.009)</span></td>
+            <td class="price"><span style="color:var(--muted)">53.389</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-11.009)</span></td>
             <td class="memo">order_id: 75b1560f-d3f9-4111-9080-a7fa83a5f153</td>
             <td class="tx"><code>f494ab0785b9…</code></td>
         </tr>
         
-        <tr>
-            <td class="idx">3</td>
+        <tr class="suspicious">
+            <td class="idx">3 ⚠️</td>
             <td class="ts">2026-07-10 15:55 (UTC+5)</td>
             <td class="addr">mwmwmw.pcash </td>
             <td class="amount">41.1820 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">40.674</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.508)</span></td>
+            <td class="price"><span style="color:var(--muted)">40.674</span>&nbsp;<span style="color:var(--danger);font-size:11px;font-weight:600">(+0.508)</span></td>
             <td class="memo">order_id: c704ec83-2efa-4f10-84da-5f9d99a7b2f3</td>
             <td class="tx"><code>5162d7300cac…</code></td>
         </tr>
@@ -190,7 +117,7 @@
             <td class="ts">2026-07-10 23:57 (UTC+5)</td>
             <td class="addr">abxyzo.pcash </td>
             <td class="amount">38.6260 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">38.266</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.360)</span></td>
+            <td class="price"><span style="color:var(--muted)">38.266</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.360)</span></td>
             <td class="memo">order_id: 14eb89ee-553f-4ae2-8160-f3c2c86fa44d</td>
             <td class="tx"><code>baed131cee21…</code></td>
         </tr>
@@ -200,7 +127,7 @@
             <td class="ts">2026-07-11 05:27 (UTC+5)</td>
             <td class="addr">shneinefaaaa </td>
             <td class="amount">36.8800 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">36.613</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.267)</span></td>
+            <td class="price"><span style="color:var(--muted)">36.613</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.267)</span></td>
             <td class="memo">order_id: 93a34fcf-57d3-474e-b749-84165e629cd8</td>
             <td class="tx"><code>16b429300e34…</code></td>
         </tr>
@@ -210,7 +137,7 @@
             <td class="ts">2026-07-11 09:54 (UTC+5)</td>
             <td class="addr">abyezs.pcash </td>
             <td class="amount">35.4680 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">35.279</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.189)</span></td>
+            <td class="price"><span style="color:var(--muted)">35.279</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.189)</span></td>
             <td class="memo">order_id: 4ec0680e-9078-444e-8c1a-114f5f1e174a</td>
             <td class="tx"><code>d67f08e2f9a2…</code></td>
         </tr>
@@ -220,7 +147,7 @@
             <td class="ts">2026-07-11 11:51 (UTC+5)</td>
             <td class="addr">ejovik.pcash </td>
             <td class="amount">34.8540 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">34.696</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.158)</span></td>
+            <td class="price"><span style="color:var(--muted)">34.696</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.158)</span></td>
             <td class="memo">order_id: 38d6bd82-4248-4c26-8f80-247cfd5944a3</td>
             <td class="tx"><code>b7f8108c1309…</code></td>
         </tr>
@@ -230,7 +157,7 @@
             <td class="ts">2026-07-11 13:08 (UTC+5)</td>
             <td class="addr">pcky4b.pcash </td>
             <td class="amount">34.4410 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">34.311</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.130)</span></td>
+            <td class="price"><span style="color:var(--muted)">34.311</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.130)</span></td>
             <td class="memo">order_id: e0f4ab23-2f32-44b6-98a7-840e567acfa2</td>
             <td class="tx"><code>f24d19f7a355…</code></td>
         </tr>
@@ -240,7 +167,7 @@
             <td class="ts">2026-07-11 15:15 (UTC+5)</td>
             <td class="addr">r3m3me.pcash </td>
             <td class="amount">33.7690 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">33.676</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.093)</span></td>
+            <td class="price"><span style="color:var(--muted)">33.676</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.093)</span></td>
             <td class="memo">order_id: 80c48106-4147-485a-86ce-051cdb462d94</td>
             <td class="tx"><code>bd0af1464159…</code></td>
         </tr>
@@ -250,7 +177,7 @@
             <td class="ts">2026-07-11 15:17 (UTC+5)</td>
             <td class="addr">abydlw.pcash </td>
             <td class="amount">33.7590 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">33.663</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.096)</span></td>
+            <td class="price"><span style="color:var(--muted)">33.663</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.096)</span></td>
             <td class="memo">order_id: dcbf0525-fa2d-4ac1-9880-82d1997223ed</td>
             <td class="tx"><code>17164dff14ed…</code></td>
         </tr>
@@ -260,7 +187,7 @@
             <td class="ts">2026-07-11 19:32 (UTC+5)</td>
             <td class="addr">abycwc.pcash </td>
             <td class="amount">32.4150 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">32.390</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.025)</span></td>
+            <td class="price"><span style="color:var(--muted)">32.390</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.025)</span></td>
             <td class="memo">order_id: f110ad53-73ad-4b60-9c18-a4691ea3e747</td>
             <td class="tx"><code>fe5a39a62868…</code></td>
         </tr>
@@ -270,7 +197,7 @@
             <td class="ts">2026-07-11 20:18 (UTC+5)</td>
             <td class="addr">5hinoi.pcash </td>
             <td class="amount">32.1660 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">32.159</span> <span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.007)</span></td>
+            <td class="price"><span style="color:var(--muted)">32.159</span>&nbsp;<span style="color:var(--accent2);font-size:11px;font-weight:600">(+0.007)</span></td>
             <td class="memo">order_id: 277ed1e2-0fd0-4bc2-9c9e-8d9bbe2364ca</td>
             <td class="tx"><code>bdeacc6aec3e…</code></td>
         </tr>
@@ -280,7 +207,7 @@
             <td class="ts">2026-07-11 22:02 (UTC+5)</td>
             <td class="addr">joepea.pcash </td>
             <td class="amount">31.6210 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">31.642</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.021)</span></td>
+            <td class="price"><span style="color:var(--muted)">31.642</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.021)</span></td>
             <td class="memo">order_id: 6a463e49-494b-44f8-a0e2-a03bb2738728</td>
             <td class="tx"><code>fc899fa10925…</code></td>
         </tr>
@@ -290,7 +217,7 @@
             <td class="ts">2026-07-11 22:16 (UTC+5)</td>
             <td class="addr">mix322.pcash </td>
             <td class="amount">31.5470 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">31.572</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.025)</span></td>
+            <td class="price"><span style="color:var(--muted)">31.572</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.025)</span></td>
             <td class="memo">order_id: ffddc932-eff9-4fe0-9a29-b288a0c73056</td>
             <td class="tx"><code>e3cf5a9857d0…</code></td>
         </tr>
@@ -300,7 +227,7 @@
             <td class="ts">2026-07-11 23:16 (UTC+5)</td>
             <td class="addr">mixerc.pcash </td>
             <td class="amount">31.2240 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">31.269</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.045)</span></td>
+            <td class="price"><span style="color:var(--muted)">31.269</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.045)</span></td>
             <td class="memo">order_id: f9984c7a-f7bf-4d94-aafc-bb12ff077bd1</td>
             <td class="tx"><code>edc7c9ace59f…</code></td>
         </tr>
@@ -310,7 +237,7 @@
             <td class="ts">2026-07-12 00:04 (UTC+5)</td>
             <td class="addr">gelabe.pcash </td>
             <td class="amount">30.9700 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">31.028</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.058)</span></td>
+            <td class="price"><span style="color:var(--muted)">31.028</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.058)</span></td>
             <td class="memo">order_id: 5f390875-374d-4006-96fb-f8ace1199df5</td>
             <td class="tx"><code>c56b14da7fcc…</code></td>
         </tr>
@@ -320,7 +247,7 @@
             <td class="ts">2026-07-12 00:52 (UTC+5)</td>
             <td class="addr">imprar.pcash </td>
             <td class="amount">30.7220 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">30.791</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.069)</span></td>
+            <td class="price"><span style="color:var(--muted)">30.791</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.069)</span></td>
             <td class="memo">order_id: bc27d3c4-402f-4d3e-b6d2-98b3c70db614</td>
             <td class="tx"><code>fb8b50835c71…</code></td>
         </tr>
@@ -330,40 +257,31 @@
             <td class="ts">2026-07-12 02:12 (UTC+5)</td>
             <td class="addr">pmcelt.pcash </td>
             <td class="amount">30.2980 USDCASH</td>
-            <td class="price"><span style="color:var(--muted)">30.390</span> <span style="color:var(--accent);font-size:11px;font-weight:600">(-0.092)</span></td>
+            <td class="price"><span style="color:var(--muted)">30.390</span>&nbsp;<span style="color:var(--accent);font-size:11px;font-weight:600">(-0.092)</span></td>
             <td class="memo">order_id: 26a9461b-2fb5-4b88-994b-6c902f3ae578</td>
             <td class="tx"><code>ef957388dc0e…</code></td>
         </tr>
         </tbody>
     </table>
-
     <h2 class="section-title">🥈 Участники <span class="section-count">(следующие 96 по сумме)</span></h2>
     <table>
-        <thead>
-            <tr>
-                <th class="idx">#</th>
-                <th>Время (UTC+5)</th>
-                <th>Отправитель</th>
-                <th>Сумма</th>
-                <th>Ожид. (откл.)</th>
-                <th>Memo</th>
-                <th>TX</th>
-            </tr>
-        </thead>
+        <thead><tr>
+            <th class="idx">#</th>
+            <th>Время (UTC+5)</th>
+            <th>Отправитель</th>
+            <th>Сумма</th>
+            <th>Ожид. (откл.)</th>
+            <th>Memo</th>
+            <th>TX</th>
+        </tr></thead>
         <tbody><tr><td colspan="7" class="empty">Поступлений в этой группе нет.</td></tr></tbody>
     </table>
-
     
-
     <div class="footer">
-        Источник данных: https://hyperion.paycash.online ·
-        Контракт токена: token.pcash ·
-        Диапазон суммы: (10, 60) · Круглые суммы (кратные 0.5) отброшены ·
-        Макс. 10 записей на адрес · Сортировка: по сумме по убыванию<br>
-        Редукцион: старт 2026-07-02T05:10:36 UTC · начальная цена $100.0 ·
-        снижение $0.005/мин · мин. цена $0.68 ·
-        порог подозрительности: +$2.0 от ожидаемой цены<br>
-        ⚠️ При начале нового турнира обнови <code>AUCTION_START_UTC</code> в настройках скрипта.
+        Источник: https://hyperion.paycash.online · Контракт: token.pcash ·
+        Диапазон: (10, 60) · Круглые суммы отброшены · Макс. 10/адрес<br>
+        Редукцион: старт 2026-07-02T05:10:36 UTC · $100.0 → -0.005$/мин · мин. $0.68 · порог ±$0.5<br>
+        ⚠️ При новом турнире обнови <code>AUCTION_START_UTC</code> в настройках скрипта.
     </div>
 </div>
 </body>
