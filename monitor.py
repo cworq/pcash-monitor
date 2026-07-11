@@ -4,29 +4,15 @@
 Мониторинг поступлений USDCASH на аккаунт 4store.pcash (сеть Vaulta / ex-EOS).
 
 Что делает скрипт:
-  1. Запрашивает у публичной Hyperion History API ноды все действия
-     transfer контракта token.pcash, где получатель (to) = ACCOUNT,
-     за последние 7 дней (учитывая пагинацию, лимит API — 100 записей за раз).
-  2. Оставляет только переводы в токене USDCASH.
-  3. Отбрасывает суммы, которые попадают вне диапазона (10, 60) — строго
-     больше 10 и строго меньше 60 (границы 10 и 60 исключаются).
-  4. Отбрасывает "круглые" суммы — те, что кратны 0.5 (т.е. дробная часть
-     .0000 или .5000, например 20.0000 или 20.5000). Остаются только суммы
-     с "разнообразным" хвостом, например 24.9740.
-  5. Группирует переводы по адресу отправителя (`from`).
-  6. Из каждого уникального адреса оставляет МАКСИМУМ MAX_PER_ADDRESS переводов
-     (самые ранние по времени), остальные дубли с того же адреса отбрасывает.
-  7. Помечает "подозрительные" транзакции — те, что идут ВЫШЕ предыдущей
-     по времени (против тренда снижения цены в редукционе).
-  8. Сортирует итоговый список по сумме перевода — по убыванию.
-  9. Генерирует HTML-страницу с двумя таблицами (Капитаны / Участники)
-     и строкой-сводкой об остатке, который не вошёл в таблицы.
-  10. Время отображается в часовом поясе UTC+DISPLAY_UTC_OFFSET (Казахстан UTC+5).
-
-Запуск:
-    python3 monitor.py
-
-Зависимостей кроме стандартной библиотеки Python нет.
+  1. Тянет все transfer контракта token.pcash на ACCOUNT за последние 7 дней.
+  2. Оставляет только USDCASH.
+  3. Фильтр диапазона: строго (MIN_AMOUNT, MAX_AMOUNT).
+  4. Отбрасывает "круглые" суммы кратные ROUND_STEP (0.5).
+  5. Группирует по адресу отправителя, макс. MAX_PER_ADDRESS записей на адрес.
+  6. Помечает подозрительные транзакции — те что идут ВЫШЕ предыдущей по времени
+     (против тренда снижения редукциона) с учётом допуска SUSPICIOUS_TOLERANCE.
+  7. Сортирует по сумме по убыванию, делит на Капитаны / Участники / остаток.
+  8. Время отображается в UTC+DISPLAY_UTC_OFFSET (Казахстан UTC+5).
 """
 
 import json
@@ -35,43 +21,43 @@ import urllib.request
 import urllib.parse
 import urllib.error
 from datetime import datetime, timedelta, timezone
-
 from html import escape
 
 # ============================== НАСТРОЙКИ ==============================
 
-ACCOUNT = "4store.pcash"        # чей аккаунт мониторим (получатель)
-TOKEN_CONTRACT = "token.pcash"  # контракт-эмитент токена USDCASH
-TOKEN_SYMBOL = "USDCASH"        # какой токен нас интересует
-DAYS_BACK = 7                   # глубина "последней недели" в днях
-MAX_PER_ADDRESS = 10            # максимум переводов с одного адреса в выводе
+ACCOUNT = "4store.pcash"
+TOKEN_CONTRACT = "token.pcash"
+TOKEN_SYMBOL = "USDCASH"
+DAYS_BACK = 7
+MAX_PER_ADDRESS = 10
 DISPLAY_UTC_OFFSET = 5          # UTC+5 (Казахстан, Алматы/Астана)
 
 MIN_AMOUNT = 10                 # нижняя граница суммы (строго больше)
 MAX_AMOUNT = 60                 # верхняя граница суммы (строго меньше)
-ROUND_STEP = 0.5                # суммы, кратные этому шагу, считаются "круглыми" и отбрасываются
-ROUND_EPSILON = 1e-6            # допуск на погрешность float-сравнения при проверке кратности
+ROUND_STEP = 0.5                # суммы кратные этому шагу считаются "круглыми"
+ROUND_EPSILON = 1e-6
 
-TOP_GROUP_SIZE = 24             # сколько самых крупных переводов попадает в группу "Капитаны"
-SECOND_GROUP_SIZE = 96          # сколько следующих по размеру переводов попадает в "Участники"
+TOP_GROUP_SIZE = 24             # Капитаны
+SECOND_GROUP_SIZE = 96          # Участники
 
-# Публичные Hyperion-ноды. Первая в списке — нода от paycash (сервиса самого токена USDCASH),
-# остальные — общие публичные ноды EOS-сети как запасной вариант.
+# Допуск при проверке "против тренда": если взнос выше предыдущего не более чем
+# на эту сумму — НЕ считаем подозрительным (небольшие колебания возможны).
+SUSPICIOUS_TOLERANCE = 0.5      # $
+
 HYPERION_ENDPOINTS = [
     "https://hyperion.paycash.online",
     "https://eos.hyperion.eosrio.io",
     "https://eos.eosusa.io",
 ]
 
-OUTPUT_HTML = "public/index.html"  # Vercel раздаёт статику из папки public/
-PAGE_LIMIT = 100   # сколько записей просить за один запрос (максимум у Hyperion обычно 100)
-HTTP_TIMEOUT = 15  # секунд на один HTTP-запрос, прежде чем считать ноду недоступной
+OUTPUT_HTML = "public/index.html"
+PAGE_LIMIT = 100
+HTTP_TIMEOUT = 15
 
 # ============================== ВСПОМОГАТЕЛЬНОЕ ==============================
 
 
 def http_get_json(url, timeout=HTTP_TIMEOUT):
-    """Простой GET-запрос с разбором JSON-ответа."""
     req = urllib.request.Request(url, headers={"User-Agent": "pcash-monitor/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         raw = resp.read()
@@ -79,15 +65,9 @@ def http_get_json(url, timeout=HTTP_TIMEOUT):
 
 
 def fetch_actions(endpoint, account, contract, action_name, after_iso, before_iso):
-    """
-    Тянет ВСЕ действия (с пагинацией) с заданными фильтрами через Hyperion v2 API.
-    Возвращает список "сырых" объектов action из ответа Hyperion.
-    Печатает прогресс по страницам, чтобы было видно, что скрипт не завис.
-    """
     all_actions = []
     skip = 0
     page = 1
-
     while True:
         params = {
             "account": account,
@@ -101,31 +81,22 @@ def fetch_actions(endpoint, account, contract, action_name, after_iso, before_is
         url = f"{endpoint}/v2/history/get_actions?{urllib.parse.urlencode(params)}"
         print(f"    [.] страница {page} (skip={skip})...", flush=True)
         data = http_get_json(url)
-
         actions = data.get("actions", [])
         if not actions:
             break
-
         all_actions.extend(actions)
-        print(f"        получено {len(actions)} записей (всего пока: {len(all_actions)})", flush=True)
-
+        print(f"        получено {len(actions)} (всего: {len(all_actions)})", flush=True)
         if len(actions) < PAGE_LIMIT:
             break
-
         skip += PAGE_LIMIT
         page += 1
-
         if skip > 20000:
             break
-
     return all_actions
 
 
 def format_timestamp(timestamp_raw):
-    """
-    Конвертирует ISO-timestamp из UTC в локальное время UTC+DISPLAY_UTC_OFFSET.
-    Возвращает строку вида "2026-06-28 18:45 (UTC+5)".
-    """
+    """UTC ISO → локальное время UTC+DISPLAY_UTC_OFFSET."""
     if not timestamp_raw:
         return None
     try:
@@ -137,62 +108,43 @@ def format_timestamp(timestamp_raw):
 
 
 def parse_transfer(action):
-    """
-    Достаёт из сырого action нужные поля: from, to, quantity, symbol, memo, время, tx id.
-    Возвращает None, если структура не похожа на обычный transfer.
-    Время конвертируется в локальный часовой пояс (UTC+DISPLAY_UTC_OFFSET).
-    """
     act = action.get("act", {})
     data = act.get("data", {})
-
     frm = data.get("from")
     to = data.get("to")
     quantity_raw = data.get("quantity")
     memo = data.get("memo", "")
-
     if not frm or not to or not quantity_raw:
         return None
-
     parts = str(quantity_raw).strip().split(" ")
     if len(parts) != 2:
         return None
-
     amount_str, symbol = parts
     try:
         amount = float(amount_str)
     except ValueError:
         return None
-
     timestamp_raw = action.get("@timestamp") or action.get("timestamp")
-    timestamp = format_timestamp(timestamp_raw)
-    # Сохраняем сырой timestamp для сортировки (всегда UTC ISO)
-    timestamp_sort = timestamp_raw or ""
-
-    trx_id = action.get("trx_id", "")
-
     return {
         "from": frm,
         "to": to,
         "amount": amount,
         "symbol": symbol,
         "memo": memo,
-        "timestamp": timestamp,
-        "timestamp_sort": timestamp_sort,
-        "trx_id": trx_id,
+        "timestamp": format_timestamp(timestamp_raw),
+        "timestamp_sort": timestamp_raw or "",
+        "trx_id": action.get("trx_id", ""),
         "suspicious": False,
+        "diff_from_prev": None,   # отклонение от предыдущего взноса по времени
     }
 
 
 def is_round_amount(amount):
-    """
-    Возвращает True, если сумма "круглая" — кратна ROUND_STEP (0.5).
-    """
     remainder = round(amount / ROUND_STEP) * ROUND_STEP
     return abs(amount - remainder) < ROUND_EPSILON
 
 
 def try_endpoints(account, contract, action_name, after_iso, before_iso):
-    """Пробует по очереди публичные ноды, пока одна не ответит без ошибки."""
     last_error = None
     for endpoint in HYPERION_ENDPOINTS:
         try:
@@ -200,34 +152,32 @@ def try_endpoints(account, contract, action_name, after_iso, before_iso):
             return actions, endpoint, None
         except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, json.JSONDecodeError) as e:
             last_error = f"{endpoint}: {e}"
-            continue
     return [], None, last_error
 
 
 def mark_suspicious(transfers_by_time):
     """
-    Помечает транзакции, идущие ПРОТИВ тренда снижения цены в редукционе.
-    Редукцион — цена падает со временем, поэтому каждый следующий взнос
-    по времени должен быть <= предыдущего. Если пришло БОЛЬШЕ — подозрительно,
-    скорее всего это системный/нецелевой перевод, а не взнос игрока.
-    transfers_by_time — список уже отсортированный по timestamp (от старых к новым).
+    Помечает транзакции против тренда снижения редукциона.
+    Редукцион падает со временем — каждый следующий взнос должен быть <=
+    предыдущего (с допуском SUSPICIOUS_TOLERANCE на небольшие колебания).
+    Если взнос выше предыдущего на величину > допуска — подозрительно.
+    Также считаем разницу с предыдущим взносом для отображения в таблице.
     """
     prev_amount = None
     for t in transfers_by_time:
-        if prev_amount is not None and t["amount"] > prev_amount:
-            t["suspicious"] = True
+        if prev_amount is not None:
+            diff = t["amount"] - prev_amount
+            t["diff_from_prev"] = round(diff, 4)
+            t["suspicious"] = diff > SUSPICIOUS_TOLERANCE
         else:
+            t["diff_from_prev"] = None
             t["suspicious"] = False
         prev_amount = t["amount"]
 
 
 def render_table(rows, empty_message):
-    """
-    Рендерит одну HTML-таблицу со сквозной нумерацией строк слева (#1, #2, ...).
-    Подозрительные строки (suspicious=True) выделяются цветом.
-    """
     if not rows:
-        return f'<tr><td colspan="6" class="empty">{escape(empty_message)}</td></tr>'
+        return f'<tr><td colspan="7" class="empty">{escape(empty_message)}</td></tr>'
 
     table_rows = ""
     for i, r in enumerate(rows, start=1):
@@ -239,12 +189,27 @@ def render_table(rows, empty_message):
         row_class = ' class="suspicious"' if r.get("suspicious") else ""
         susp_icon = " ⚠️" if r.get("suspicious") else ""
 
+        # Колонка изменения vs предыдущий взнос по времени
+        diff = r.get("diff_from_prev")
+        if diff is None:
+            diff_cell = '<span style="color:var(--muted)">—</span>'
+        else:
+            sign = "+" if diff > 0 else ""
+            if diff > SUSPICIOUS_TOLERANCE:
+                color = "var(--danger)"
+            elif diff > 0:
+                color = "var(--accent2)"
+            else:
+                color = "var(--accent)"
+            diff_cell = f'<span style="color:{color};font-weight:600">{sign}{diff:.4f}</span>'
+
         table_rows += f"""
         <tr{row_class}>
             <td class="idx">{i}{susp_icon}</td>
-            <td>{escape(r['timestamp'] or '—')}</td>
+            <td class="ts">{escape(r['timestamp'] or '—')}</td>
             <td class="addr">{escape(r['from'])} {dup_badge}</td>
             <td class="amount">{r['amount']:.4f} {escape(r['symbol'])}</td>
+            <td class="diff">{diff_cell}</td>
             <td class="memo">{escape(r['memo'] or '')}</td>
             <td class="tx"><code>{escape(r['trx_id'][:12])}…</code></td>
         </tr>
@@ -253,20 +218,16 @@ def render_table(rows, empty_message):
 
 
 def build_html(rows, period_start, period_end, used_endpoint, error_message, total_raw_count):
-    """Собирает итоговую HTML-страницу из подготовленных строк."""
-
     now_local = datetime.now(timezone.utc) + timedelta(hours=DISPLAY_UTC_OFFSET)
     generated_at = now_local.strftime("%Y-%m-%d %H:%M:%S") + f" (UTC+{DISPLAY_UTC_OFFSET})"
 
+    body_extra = ""
     if error_message:
         body_extra = f"""
         <div class="error-box">
             ⚠️ Не удалось получить данные ни с одной из публичных нод.<br>
             Последняя ошибка: {escape(error_message)}
-        </div>
-        """
-    else:
-        body_extra = ""
+        </div>"""
 
     captains_rows = rows[:TOP_GROUP_SIZE]
     members_rows = rows[TOP_GROUP_SIZE:TOP_GROUP_SIZE + SECOND_GROUP_SIZE]
@@ -275,17 +236,23 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
     captains_table = render_table(captains_rows, "Поступлений в этой группе нет.")
     members_table = render_table(members_rows, "Поступлений в этой группе нет.")
 
+    remainder_html = ""
     if remainder_count > 0:
         remainder_html = f'<div class="remainder">И ещё <strong>{remainder_count}</strong> записей не вошли в таблицы</div>'
-    else:
-        remainder_html = ""
 
     unique_addresses = len({r["from"] for r in rows})
     suspicious_count = sum(1 for r in rows if r.get("suspicious"))
 
     susp_legend = ""
     if suspicious_count > 0:
-        susp_legend = '<div class="susp-legend">⚠️ Подозрительные строки (выделены оранжевым) — сумма выше предыдущей по времени, что противоречит тренду снижения цены в редукционе. Возможно, это системные переводы, а не взносы игроков.</div>'
+        susp_legend = f"""<div class="susp-legend">
+            ⚠️ <strong>{suspicious_count} подозрительных</strong> — сумма выше предыдущего взноса
+            по времени более чем на ${SUSPICIOUS_TOLERANCE:.2f} (против тренда снижения редукциона).
+            Колонка <em>«Δ»</em> показывает разницу с предыдущим взносом:
+            <span style="color:var(--accent)">зелёный</span> = падение (норма),
+            <span style="color:var(--accent2)">оранжевый</span> = небольшой рост (в допуске),
+            <span style="color:var(--danger)">красный</span> = подозрительный рост.
+        </div>"""
 
     html = f"""<!DOCTYPE html>
 <html lang="ru">
@@ -312,25 +279,10 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         color: var(--text);
         padding: 32px 16px;
     }}
-    .wrap {{
-        max-width: 980px;
-        margin: 0 auto;
-    }}
-    h1 {{
-        font-size: 22px;
-        margin: 0 0 4px;
-    }}
-    .subtitle {{
-        color: var(--muted);
-        font-size: 14px;
-        margin-bottom: 24px;
-    }}
-    .stats {{
-        display: flex;
-        gap: 16px;
-        margin-bottom: 24px;
-        flex-wrap: wrap;
-    }}
+    .wrap {{ max-width: 1100px; margin: 0 auto; }}
+    h1 {{ font-size: 22px; margin: 0 0 4px; }}
+    .subtitle {{ color: var(--muted); font-size: 14px; margin-bottom: 24px; }}
+    .stats {{ display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }}
     .stat-card {{
         background: var(--panel);
         border: 1px solid var(--border);
@@ -338,18 +290,9 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         padding: 14px 18px;
         min-width: 150px;
     }}
-    .stat-card .num {{
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--accent);
-    }}
+    .stat-card .num {{ font-size: 24px; font-weight: 700; color: var(--accent); }}
     .stat-card .num.warn {{ color: var(--accent2); }}
-    .stat-card .label {{
-        font-size: 12px;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }}
+    .stat-card .label {{ font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }}
     table {{
         width: 100%;
         border-collapse: collapse;
@@ -359,41 +302,18 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         overflow: hidden;
         margin-bottom: 12px;
     }}
-    th, td {{
-        padding: 10px 14px;
-        text-align: left;
-        font-size: 13px;
-        border-bottom: 1px solid var(--border);
-    }}
-    th {{
-        color: var(--muted);
-        text-transform: uppercase;
-        font-size: 11px;
-        letter-spacing: 0.04em;
-        background: #1b1f28;
-    }}
+    th, td {{ padding: 10px 14px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--border); }}
+    th {{ color: var(--muted); text-transform: uppercase; font-size: 11px; letter-spacing: 0.04em; background: #1b1f28; }}
     tr:last-child td {{ border-bottom: none; }}
-    .idx {{
-        color: var(--muted);
-        font-family: ui-monospace, monospace;
-        width: 48px;
-        text-align: right;
-        white-space: nowrap;
-    }}
-    .section-title {{
-        font-size: 15px;
-        margin: 0 0 10px;
-        color: var(--text);
-    }}
-    .section-count {{
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 400;
-    }}
+    .idx {{ color: var(--muted); font-family: ui-monospace, monospace; width: 48px; text-align: right; white-space: nowrap; }}
+    .ts {{ white-space: nowrap; font-size: 12px; }}
+    .section-title {{ font-size: 15px; margin: 0 0 10px; color: var(--text); }}
+    .section-count {{ color: var(--muted); font-size: 12px; font-weight: 400; }}
     .addr {{ font-family: ui-monospace, monospace; }}
     .amount {{ font-weight: 600; color: var(--accent); white-space: nowrap; }}
-    .memo {{ color: var(--muted); max-width: 260px; overflow: hidden; text-overflow: ellipsis; }}
-    .tx code {{ color: var(--muted); }}
+    .diff {{ font-family: ui-monospace, monospace; font-size: 12px; white-space: nowrap; }}
+    .memo {{ color: var(--muted); max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }}
+    .tx code {{ color: var(--muted); font-size: 11px; }}
     .badge {{
         display: inline-block;
         background: var(--accent2);
@@ -406,16 +326,18 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
     }}
     tr.suspicious td {{ background: rgba(246, 100, 100, 0.07); }}
     tr.suspicious .amount {{ color: var(--accent2); }}
-    tr.suspicious .idx {{ color: var(--accent2); }}
+    tr.suspicious .idx {{ color: var(--danger); }}
     .susp-legend {{
         font-size: 12px;
         color: var(--muted);
         margin-bottom: 20px;
-        padding: 8px 12px;
+        padding: 10px 14px;
         background: rgba(246, 100, 100, 0.07);
         border-left: 3px solid var(--accent2);
         border-radius: 4px;
+        line-height: 1.6;
     }}
+    .susp-legend strong {{ color: var(--accent2); }}
     .remainder {{
         text-align: center;
         color: var(--muted);
@@ -436,11 +358,7 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
         margin-bottom: 20px;
         font-size: 14px;
     }}
-    .footer {{
-        margin-top: 20px;
-        color: var(--muted);
-        font-size: 12px;
-    }}
+    .footer {{ margin-top: 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }}
 </style>
 </head>
 <body>
@@ -482,13 +400,12 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
                 <th>Время (UTC+{DISPLAY_UTC_OFFSET})</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
+                <th>Δ к пред.</th>
                 <th>Memo</th>
                 <th>TX</th>
             </tr>
         </thead>
-        <tbody>
-            {captains_table}
-        </tbody>
+        <tbody>{captains_table}</tbody>
     </table>
 
     <h2 class="section-title">🥈 Участники <span class="section-count">(следующие {SECOND_GROUP_SIZE} по сумме)</span></h2>
@@ -499,13 +416,12 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
                 <th>Время (UTC+{DISPLAY_UTC_OFFSET})</th>
                 <th>Отправитель</th>
                 <th>Сумма</th>
+                <th>Δ к пред.</th>
                 <th>Memo</th>
                 <th>TX</th>
             </tr>
         </thead>
-        <tbody>
-            {members_table}
-        </tbody>
+        <tbody>{members_table}</tbody>
     </table>
 
     {remainder_html}
@@ -513,8 +429,9 @@ def build_html(rows, period_start, period_end, used_endpoint, error_message, tot
     <div class="footer">
         Источник данных: {escape(used_endpoint or "—")} ·
         Контракт токена: {escape(TOKEN_CONTRACT)} ·
-        Диапазон суммы: ({MIN_AMOUNT}, {MAX_AMOUNT}), круглые суммы (кратные {ROUND_STEP}) отброшены ·
-        Максимум {MAX_PER_ADDRESS} записей на один уникальный адрес · Сортировка: по сумме, по убыванию.
+        Диапазон суммы: ({MIN_AMOUNT}, {MAX_AMOUNT}) · Круглые суммы (кратные {ROUND_STEP}) отброшены ·
+        Макс. {MAX_PER_ADDRESS} записей на адрес · Сортировка: по сумме по убыванию ·
+        Допуск на колебание цены редукциона: ${SUSPICIOUS_TOLERANCE}
     </div>
 </div>
 </body>
@@ -541,11 +458,10 @@ def main():
     )
 
     if error_message:
-        print(f"[!] Ошибка получения данных: {error_message}")
+        print(f"[!] Ошибка: {error_message}")
 
     print(f"[i] Получено сырых действий: {len(raw_actions)} (нода: {used_endpoint})")
 
-    # Парсим и фильтруем
     transfers = []
     skipped_out_of_range = 0
     skipped_round = 0
@@ -557,31 +473,25 @@ def main():
             continue
         if parsed["symbol"] != TOKEN_SYMBOL:
             continue
-
         amount = parsed["amount"]
-
         if not (MIN_AMOUNT < amount < MAX_AMOUNT):
             skipped_out_of_range += 1
             continue
-
         if is_round_amount(amount):
             skipped_round += 1
             continue
-
         transfers.append(parsed)
 
     total_raw_count = len(transfers)
-    print(f"[i] Переводов {TOKEN_SYMBOL} на {ACCOUNT} за период (после всех фильтров): {total_raw_count}")
-    print(f"[i]   Отброшено вне диапазона ({MIN_AMOUNT}, {MAX_AMOUNT}): {skipped_out_of_range}")
-    print(f"[i]   Отброшено как 'круглые' суммы: {skipped_round}")
+    print(f"[i] После фильтров: {total_raw_count} (вне диапазона: {skipped_out_of_range}, круглые: {skipped_round})")
 
-    # Сортируем по времени по возрастанию — для хронологии адресов и mark_suspicious
+    # Сортировка по времени — нужна для mark_suspicious и seq_for_address
     transfers.sort(key=lambda t: t["timestamp_sort"] or "")
 
-    # Помечаем подозрительные транзакции (против тренда снижения редукциона)
+    # Помечаем подозрительные (против тренда снижения)
     mark_suspicious(transfers)
 
-    # Группируем по адресу, оставляем максимум MAX_PER_ADDRESS на адрес
+    # Группируем по адресу, макс. MAX_PER_ADDRESS на адрес
     per_address_count = {}
     filtered_rows = []
     for t in transfers:
@@ -592,15 +502,14 @@ def main():
             t["seq_for_address"] = count
             filtered_rows.append(t)
 
-    # Финальная сортировка — по сумме, по убыванию
+    # Сортировка по сумме по убыванию
     filtered_rows.sort(key=lambda t: t["amount"], reverse=True)
 
-    suspicious_in_output = sum(1 for r in filtered_rows if r.get("suspicious"))
+    suspicious_count = sum(1 for r in filtered_rows if r.get("suspicious"))
     print(f"[i] Уникальных адресов: {len(per_address_count)}")
-    print(f"[i] Записей в отчёте (после лимита {MAX_PER_ADDRESS}/адрес): {len(filtered_rows)}")
-    print(f"[i] Из них подозрительных (против тренда): {suspicious_in_output}")
+    print(f"[i] Записей в отчёте: {len(filtered_rows)}")
+    print(f"[i] Подозрительных: {suspicious_count}")
 
-    # Период тоже показываем в локальном времени
     period_start_local = (period_start_dt + timedelta(hours=DISPLAY_UTC_OFFSET)).strftime("%Y-%m-%d %H:%M") + f" (UTC+{DISPLAY_UTC_OFFSET})"
     period_end_local = (period_end_dt + timedelta(hours=DISPLAY_UTC_OFFSET)).strftime("%Y-%m-%d %H:%M") + f" (UTC+{DISPLAY_UTC_OFFSET})"
 
