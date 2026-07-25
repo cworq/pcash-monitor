@@ -25,10 +25,10 @@ ROUND_EPSILON = 1e-6
 TOP_GROUP_SIZE = 24
 SECOND_GROUP_SIZE = 96
 
-AUCTION_TOURNAMENT_ID = 28      # ID текущего турнира (из API)
+AUCTION_TOURNAMENT_ID = 28      # ID текущего турнира — обновляй при каждом новом турнире!
 AUCTION_PRICE_PER_MIN = 0.005   # снижение цены за минуту ($)
 AUCTION_MIN_PRICE = 0.68        # минимальная цена редукциона
-SUSPICIOUS_THRESHOLD = 2.0      # порог: если взнос выше ожидаемой цены на эту сумму — подозрительно
+SUSPICIOUS_THRESHOLD = 2.0      # допуск отклонения от ожидаемой цены ($), всё что выше — подозрительно
 
 MIXER_API_URL = "https://api.mixer-cup.gg/"
 
@@ -98,7 +98,7 @@ def http_post_json(url, payload, timeout=HTTP_TIMEOUT):
 
 def fetch_current_bid(tournament_id):
     """
-    Получает текущую цену редукциона из API mixer-cup.gg.
+    Получает точную текущую цену редукциона из API mixer-cup.gg.
     Возвращает (current_bid_price, bid_available_till_dt) или (None, None) при ошибке.
     """
     payload = {
@@ -206,14 +206,13 @@ def try_endpoints(account, contract, action_name, after_iso, before_iso):
 def expected_price_at(timestamp_raw, current_bid, current_bid_time):
     """
     Вычисляет ожидаемую цену редукциона в момент транзакции.
-    Использует точную текущую цену из API как точку отсчёта.
-    цена_тогда = current_bid + (current_bid_time - tx_time) * AUCTION_PRICE_PER_MIN
-    (если транзакция раньше текущего момента — цена была выше)
+    Использует точную текущую цену из API как точку отсчёта:
+    цена_тогда = текущая_цена + (текущее_время - время_транзакции) * 0.005
+    Транзакция раньше = цена была выше (редукцион падает со временем).
     """
     tx_time = parse_dt(timestamp_raw)
     if tx_time is None or current_bid is None or current_bid_time is None:
         return None
-    # Разница в минутах между текущим моментом и транзакцией
     minutes_diff = (current_bid_time - tx_time).total_seconds() / 60
     price = current_bid + minutes_diff * AUCTION_PRICE_PER_MIN
     return round(max(price, AUCTION_MIN_PRICE), 4)
@@ -230,12 +229,12 @@ def main():
     print(f"[i] Запрашиваю переводы {TOKEN_CONTRACT}:transfer на {ACCOUNT}")
     print(f"[i] Период: {after_iso} .. {before_iso} (UTC)")
 
-    # Получаем точную текущую цену редукциона из API
+    # Получаем точную текущую цену редукциона из API mixer-cup.gg
     current_bid, current_bid_time = fetch_current_bid(AUCTION_TOURNAMENT_ID)
     if current_bid is not None:
         print(f"[i] Текущая цена редукциона: ${current_bid:.4f} (до {current_bid_time})")
     else:
-        print("[!] Не удалось получить текущую цену редукциона — подозрительные не будут определяться")
+        print("[!] Не удалось получить цену редукциона — подозрительные не будут определяться")
 
     raw_actions, used_endpoint, error_message = try_endpoints(
         ACCOUNT, TOKEN_CONTRACT, "transfer", after_iso, before_iso
@@ -284,7 +283,8 @@ def main():
             t["seq_for_address"] = count
             t["expected_price"] = expected
             t["price_diff"] = diff
-            t["suspicious"] = (diff is not None and diff > SUSPICIOUS_THRESHOLD)
+            # Подозрительно если отклонение в любую сторону больше порога
+            t["suspicious"] = (diff is not None and abs(diff) > SUSPICIOUS_THRESHOLD)
             filtered_rows.append(t)
 
     # Сортировка по времени — новые сверху
