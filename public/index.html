@@ -57,7 +57,7 @@
 <script>
 // URL сырого JSON в GitHub — замени на свой репозиторий!
 // Формат: https://raw.githubusercontent.com/ЛОГИН/РЕПО/main/public/data.json
-const DATA_URL = "https://cdn.jsdelivr.net/gh/cworq/pcash-monitor@main/public/data.json";
+const DATA_URL = "https://raw.githubusercontent.com/cworq/pcash-monitor/main/public/data.json";
 
 const REFRESH_MS = 15 * 60 * 1000; // 15 минут
 
@@ -192,7 +192,7 @@ async function loadData() {
     try {
         // cache-bust чтобы браузер не кешировал старый JSON
         const url = DATA_URL + "?t=" + Date.now();
-        const resp = await fetch(url);
+        const resp = await fetch(url, { cache: "no-store" });
         if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
         const data = await resp.json();
         render(data);
