@@ -33,7 +33,7 @@ SECOND_GROUP_SIZE = 96
 # Параметры редукциона
 # ОБНОВЛЯЙ AUCTION_START_UTC в начале каждого нового турнира!
 # Формула: (100 - текущая_цена) / 0.005 = минут прошло, вычти из текущего времени UTC
-AUCTION_START_UTC = "2026-07-16T23:48:24"
+AUCTION_START_UTC = "2026-07-16T23:48:24Z"
 AUCTION_START_PRICE = 100.0
 AUCTION_PRICE_PER_MIN = 0.005
 AUCTION_MIN_PRICE = 0.68
