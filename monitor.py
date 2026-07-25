@@ -288,7 +288,14 @@ def main():
             filtered_rows.append(t)
 
     # Сортировка по времени — новые сверху
-    filtered_rows.sort(key=lambda t: t["timestamp_sort"] or "", reverse=True)
+    # Сначала сортируем по сумме — чтобы правильно разбить на Капитаны/Участники
+    filtered_rows.sort(key=lambda t: t["amount"], reverse=True)
+
+    # Внутри каждой группы сортируем по времени — новые сверху
+    captains = sorted(filtered_rows[:TOP_GROUP_SIZE], key=lambda t: t["timestamp_sort"] or "", reverse=True)
+    members = sorted(filtered_rows[TOP_GROUP_SIZE:TOP_GROUP_SIZE + SECOND_GROUP_SIZE], key=lambda t: t["timestamp_sort"] or "", reverse=True)
+    rest = filtered_rows[TOP_GROUP_SIZE + SECOND_GROUP_SIZE:]
+    filtered_rows = captains + members + rest
 
     suspicious_count = sum(1 for r in filtered_rows if r.get("suspicious"))
     remainder_count = max(0, len(filtered_rows) - TOP_GROUP_SIZE - SECOND_GROUP_SIZE)
