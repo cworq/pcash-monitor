@@ -28,7 +28,7 @@ SECOND_GROUP_SIZE = 96
 AUCTION_TOURNAMENT_ID = 28      # ID текущего турнира — обновляй при каждом новом турнире!
 AUCTION_PRICE_PER_MIN = 0.005   # снижение цены за минуту ($)
 AUCTION_MIN_PRICE = 0.68        # минимальная цена редукциона
-SUSPICIOUS_THRESHOLD = 2.0      # допуск отклонения от ожидаемой цены ($), всё что выше — подозрительно
+SUSPICIOUS_THRESHOLD = 2.0      # допуск отклонения от ожидаемой цены ($)
 
 MIXER_API_URL = "https://api.mixer-cup.gg/"
 
@@ -46,7 +46,6 @@ HTTP_TIMEOUT = 15
 
 
 def parse_dt(s):
-    """Парсит дату в aware UTC datetime."""
     if not s:
         return None
     s = s.strip()
@@ -97,10 +96,6 @@ def http_post_json(url, payload, timeout=HTTP_TIMEOUT):
 
 
 def fetch_current_bid(tournament_id):
-    """
-    Получает точную текущую цену редукциона из API mixer-cup.gg.
-    Возвращает (current_bid_price, bid_available_till_dt) или (None, None) при ошибке.
-    """
     payload = {
         "operationName": "CurrentBid",
         "query": """query CurrentBid($tournamentId: Int!) {
@@ -204,12 +199,6 @@ def try_endpoints(account, contract, action_name, after_iso, before_iso):
 
 
 def expected_price_at(timestamp_raw, current_bid, current_bid_time):
-    """
-    Вычисляет ожидаемую цену редукциона в момент транзакции.
-    Использует точную текущую цену из API как точку отсчёта:
-    цена_тогда = текущая_цена + (текущее_время - время_транзакции) * 0.005
-    Транзакция раньше = цена была выше (редукцион падает со временем).
-    """
     tx_time = parse_dt(timestamp_raw)
     if tx_time is None or current_bid is None or current_bid_time is None:
         return None
@@ -229,12 +218,11 @@ def main():
     print(f"[i] Запрашиваю переводы {TOKEN_CONTRACT}:transfer на {ACCOUNT}")
     print(f"[i] Период: {after_iso} .. {before_iso} (UTC)")
 
-    # Получаем точную текущую цену редукциона из API mixer-cup.gg
     current_bid, current_bid_time = fetch_current_bid(AUCTION_TOURNAMENT_ID)
     if current_bid is not None:
         print(f"[i] Текущая цена редукциона: ${current_bid:.4f} (до {current_bid_time})")
     else:
-        print("[!] Не удалось получить цену редукциона — подозрительные не будут определяться")
+        print("[!] Не удалось получить цену редукциона")
 
     raw_actions, used_endpoint, error_message = try_endpoints(
         ACCOUNT, TOKEN_CONTRACT, "transfer", after_iso, before_iso
@@ -283,19 +271,11 @@ def main():
             t["seq_for_address"] = count
             t["expected_price"] = expected
             t["price_diff"] = diff
-            # Подозрительно если отклонение в любую сторону больше порога
             t["suspicious"] = (diff is not None and abs(diff) > SUSPICIOUS_THRESHOLD)
             filtered_rows.append(t)
 
-    # Сортировка по времени — новые сверху
-    # Сначала сортируем по сумме — чтобы правильно разбить на Капитаны/Участники
+    # Сортировка по сумме убыванию — топ-24 = Капитаны, следующие 96 = Участники
     filtered_rows.sort(key=lambda t: t["amount"], reverse=True)
-
-    # Внутри каждой группы сортируем по времени — новые сверху
-    captains = sorted(filtered_rows[:TOP_GROUP_SIZE], key=lambda t: t["timestamp_sort"] or "", reverse=True)
-    members = sorted(filtered_rows[TOP_GROUP_SIZE:TOP_GROUP_SIZE + SECOND_GROUP_SIZE], key=lambda t: t["timestamp_sort"] or "", reverse=True)
-    rest = filtered_rows[TOP_GROUP_SIZE + SECOND_GROUP_SIZE:]
-    filtered_rows = captains + members + rest
 
     suspicious_count = sum(1 for r in filtered_rows if r.get("suspicious"))
     remainder_count = max(0, len(filtered_rows) - TOP_GROUP_SIZE - SECOND_GROUP_SIZE)
@@ -316,7 +296,7 @@ def main():
         "total_raw_count": total_raw_count,
         "unique_addresses": len(per_address_count),
         "suspicious_count": suspicious_count,
-        "remainder_count": len(rest),
+        "remainder_count": remainder_count,
         "current_auction_price": current_bid,
         "top_group_size": TOP_GROUP_SIZE,
         "second_group_size": SECOND_GROUP_SIZE,
