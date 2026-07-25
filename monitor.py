@@ -1,10 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Мониторинг поступлений USDCASH на аккаунт 4store.pcash.
-Генерирует public/data.json — его читает index.html через fetch каждые 15 минут.
-Vercel деплоится один раз (index.html), данные обновляются без перезапуска Vercel.
-"""
 
 import json
 import os
@@ -30,10 +25,9 @@ ROUND_EPSILON = 1e-6
 TOP_GROUP_SIZE = 24
 SECOND_GROUP_SIZE = 96
 
-# Параметры редукциона
-# ОБНОВЛЯЙ AUCTION_START_UTC в начале каждого нового турнира!
-# Формула: (100 - текущая_цена) / 0.005 = минут прошло, вычти из текущего времени UTC
-AUCTION_START_UTC = "2026-07-16T23:48:24Z"
+# ОБНОВЛЯЙ в начале каждого нового турнира!
+# Формула: (100 - текущая_цена) / 0.005 = минут прошло, вычти из текущего UTC
+AUCTION_START_UTC = "2026-07-16T23:48:24+00:00"
 AUCTION_START_PRICE = 100.0
 AUCTION_PRICE_PER_MIN = 0.005
 AUCTION_MIN_PRICE = 0.68
@@ -51,26 +45,35 @@ HTTP_TIMEOUT = 15
 
 # ============================== ВСПОМОГАТЕЛЬНОЕ ==============================
 
+AUCTION_START_DT = datetime.fromisoformat(AUCTION_START_UTC)
+
 
 def parse_dt(s):
-    """Универсальный парсер дат из Hyperion. Всегда возвращает aware datetime UTC."""
+    """Парсит дату в aware UTC datetime."""
     if not s:
         return None
-    s2 = s.replace("Z", "+00:00")
+    # Убираем миллисекунды если есть
+    # Форматы из Hyperion: "2026-07-22T21:15:50.500", "2026-07-22T21:15:50Z", "2026-07-22T21:15:50"
+    s = s.strip()
+    # Заменяем Z на +00:00
+    if s.endswith("Z"):
+        s = s[:-1] + "+00:00"
+    # Парсим
     try:
-        dt = datetime.fromisoformat(s2)
+        dt = datetime.fromisoformat(s)
     except ValueError:
+        # Обрезаем до секунд и пробуем снова
         try:
-            dt = datetime.fromisoformat(s2[:19])
+            dt = datetime.fromisoformat(s[:19])
         except ValueError:
             return None
+    # Если нет timezone — считаем UTC
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
     return dt
 
 
 def format_timestamp(timestamp_raw):
-    """UTC ISO → локальное время UTC+DISPLAY_UTC_OFFSET для отображения."""
     dt = parse_dt(timestamp_raw)
     if dt is None:
         return timestamp_raw or ""
@@ -79,12 +82,10 @@ def format_timestamp(timestamp_raw):
 
 
 def expected_price_at(timestamp_raw):
-    """Ожидаемая цена редукциона в момент транзакции."""
     tx_time = parse_dt(timestamp_raw)
     if tx_time is None:
         return None
-    auction_start = parse_dt(AUCTION_START_UTC)
-    minutes = (tx_time - auction_start).total_seconds() / 60
+    minutes = (tx_time - AUCTION_START_DT).total_seconds() / 60
     if minutes < 0:
         return None
     price = AUCTION_START_PRICE - minutes * AUCTION_PRICE_PER_MIN
@@ -183,11 +184,15 @@ def main():
     after_iso = period_start_dt.strftime("%Y-%m-%dT%H:%M:%S")
     before_iso = period_end_dt.strftime("%Y-%m-%dT%H:%M:%S")
 
+    print(f"[i] AUCTION_START_DT = {AUCTION_START_DT}")
     print(f"[i] Запрашиваю переводы {TOKEN_CONTRACT}:transfer на {ACCOUNT}")
     print(f"[i] Период: {after_iso} .. {before_iso} (UTC)")
 
-    now_exp = expected_price_at(now.strftime("%Y-%m-%dT%H:%M:%S"))
-    print(f"[i] Ожидаемая цена редукциона сейчас: ${now_exp:.3f}" if now_exp else "[!] expected_price вернул None")
+    now_exp = expected_price_at(now.strftime("%Y-%m-%dT%H:%M:%S+00:00"))
+    if now_exp is not None:
+        print(f"[i] Ожидаемая цена редукциона сейчас: ${now_exp:.3f}")
+    else:
+        print("[!] expected_price_at вернул None для текущего времени!")
 
     raw_actions, used_endpoint, error_message = try_endpoints(
         ACCOUNT, TOKEN_CONTRACT, "transfer", after_iso, before_iso
@@ -221,10 +226,14 @@ def main():
     total_raw_count = len(transfers)
     print(f"[i] После фильтров: {total_raw_count} (вне диапазона: {skipped_out_of_range}, круглые: {skipped_round})")
 
-    # Сортировка по времени для seq_for_address
     transfers.sort(key=lambda t: t["timestamp_sort"] or "")
 
-    # Добавляем expected_price, price_diff, suspicious, seq_for_address
+    # Диагностика первой транзакции
+    if transfers:
+        t0 = transfers[0]
+        exp0 = expected_price_at(t0["timestamp_sort"])
+        print(f"[i] Первая транзакция: ts={t0['timestamp_sort']!r}, expected={exp0}, amount={t0['amount']}")
+
     per_address_count = {}
     filtered_rows = []
     for t in transfers:
@@ -240,14 +249,13 @@ def main():
             t["suspicious"] = (diff is not None and diff > SUSPICIOUS_THRESHOLD)
             filtered_rows.append(t)
 
-    # Сортировка по сумме по убыванию
     filtered_rows.sort(key=lambda t: t["amount"], reverse=True)
 
     suspicious_count = sum(1 for r in filtered_rows if r.get("suspicious"))
     remainder_count = max(0, len(filtered_rows) - TOP_GROUP_SIZE - SECOND_GROUP_SIZE)
 
     print(f"[i] Уникальных адресов: {len(per_address_count)}")
-    print(f"[i] Записей в отчёте: {len(filtered_rows)}, подозрительных: {suspicious_count}")
+    print(f"[i] Записей: {len(filtered_rows)}, подозрительных: {suspicious_count}")
 
     now_local = now + timedelta(hours=DISPLAY_UTC_OFFSET)
     period_start_local = (period_start_dt + timedelta(hours=DISPLAY_UTC_OFFSET)).strftime("%Y-%m-%d %H:%M") + f" (UTC+{DISPLAY_UTC_OFFSET})"
