@@ -316,7 +316,7 @@ def main():
         "total_raw_count": total_raw_count,
         "unique_addresses": len(per_address_count),
         "suspicious_count": suspicious_count,
-        "remainder_count": remainder_count,
+        "remainder_count": len(rest),
         "current_auction_price": current_bid,
         "top_group_size": TOP_GROUP_SIZE,
         "second_group_size": SECOND_GROUP_SIZE,
