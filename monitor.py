@@ -25,13 +25,12 @@ ROUND_EPSILON = 1e-6
 TOP_GROUP_SIZE = 24
 SECOND_GROUP_SIZE = 96
 
-# ОБНОВЛЯЙ в начале каждого нового турнира!
-# Формула: (100 - текущая_цена) / 0.005 = минут прошло, вычти из текущего UTC
-AUCTION_START_UTC = "2026-07-16T23:48:24+00:00"
-AUCTION_START_PRICE = 100.0
-AUCTION_PRICE_PER_MIN = 0.005
-AUCTION_MIN_PRICE = 0.68
-SUSPICIOUS_THRESHOLD = 0.5
+AUCTION_TOURNAMENT_ID = 28      # ID текущего турнира (из API)
+AUCTION_PRICE_PER_MIN = 0.005   # снижение цены за минуту ($)
+AUCTION_MIN_PRICE = 0.68        # минимальная цена редукциона
+SUSPICIOUS_THRESHOLD = 2.0      # порог: если взнос выше ожидаемой цены на эту сумму — подозрительно
+
+MIXER_API_URL = "https://api.mixer-cup.gg/"
 
 HYPERION_ENDPOINTS = [
     "https://hyperion.paycash.online",
@@ -45,29 +44,21 @@ HTTP_TIMEOUT = 15
 
 # ============================== ВСПОМОГАТЕЛЬНОЕ ==============================
 
-AUCTION_START_DT = datetime.fromisoformat(AUCTION_START_UTC)
-
 
 def parse_dt(s):
     """Парсит дату в aware UTC datetime."""
     if not s:
         return None
-    # Убираем миллисекунды если есть
-    # Форматы из Hyperion: "2026-07-22T21:15:50.500", "2026-07-22T21:15:50Z", "2026-07-22T21:15:50"
     s = s.strip()
-    # Заменяем Z на +00:00
     if s.endswith("Z"):
         s = s[:-1] + "+00:00"
-    # Парсим
     try:
         dt = datetime.fromisoformat(s)
     except ValueError:
-        # Обрезаем до секунд и пробуем снова
         try:
             dt = datetime.fromisoformat(s[:19])
         except ValueError:
             return None
-    # Если нет timezone — считаем UTC
     if dt.tzinfo is None:
         dt = dt.replace(tzinfo=timezone.utc)
     return dt
@@ -81,22 +72,58 @@ def format_timestamp(timestamp_raw):
     return dt_local.strftime("%Y-%m-%d %H:%M") + f" (UTC+{DISPLAY_UTC_OFFSET})"
 
 
-def expected_price_at(timestamp_raw):
-    tx_time = parse_dt(timestamp_raw)
-    if tx_time is None:
-        return None
-    minutes = (tx_time - AUCTION_START_DT).total_seconds() / 60
-    if minutes < 0:
-        return None
-    price = AUCTION_START_PRICE - minutes * AUCTION_PRICE_PER_MIN
-    return round(max(price, AUCTION_MIN_PRICE), 4)
-
-
 def http_get_json(url, timeout=HTTP_TIMEOUT):
     req = urllib.request.Request(url, headers={"User-Agent": "pcash-monitor/1.0"})
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         raw = resp.read()
     return json.loads(raw.decode("utf-8"))
+
+
+def http_post_json(url, payload, timeout=HTTP_TIMEOUT):
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": "pcash-monitor/1.0",
+            "Origin": "https://mixer-cup.gg",
+            "Referer": "https://mixer-cup.gg/",
+        }
+    )
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read()
+    return json.loads(raw.decode("utf-8"))
+
+
+def fetch_current_bid(tournament_id):
+    """
+    Получает текущую цену редукциона из API mixer-cup.gg.
+    Возвращает (current_bid_price, bid_available_till_dt) или (None, None) при ошибке.
+    """
+    payload = {
+        "operationName": "CurrentBid",
+        "query": """query CurrentBid($tournamentId: Int!) {
+  currentBid(tournamentId: $tournamentId) {
+    id
+    currentBid
+    bidAvailableTill
+    __typename
+  }
+}""",
+        "variables": {"tournamentId": tournament_id}
+    }
+    try:
+        resp = http_post_json(MIXER_API_URL, payload)
+        bid_data = resp.get("data", {}).get("currentBid")
+        if not bid_data:
+            return None, None
+        price = float(bid_data["currentBid"])
+        till_dt = parse_dt(bid_data["bidAvailableTill"])
+        return price, till_dt
+    except Exception as e:
+        print(f"[!] Ошибка получения CurrentBid: {e}")
+        return None, None
 
 
 def fetch_actions(endpoint, account, contract, action_name, after_iso, before_iso):
@@ -176,6 +203,22 @@ def try_endpoints(account, contract, action_name, after_iso, before_iso):
     return [], None, last_error
 
 
+def expected_price_at(timestamp_raw, current_bid, current_bid_time):
+    """
+    Вычисляет ожидаемую цену редукциона в момент транзакции.
+    Использует точную текущую цену из API как точку отсчёта.
+    цена_тогда = current_bid + (current_bid_time - tx_time) * AUCTION_PRICE_PER_MIN
+    (если транзакция раньше текущего момента — цена была выше)
+    """
+    tx_time = parse_dt(timestamp_raw)
+    if tx_time is None or current_bid is None or current_bid_time is None:
+        return None
+    # Разница в минутах между текущим моментом и транзакцией
+    minutes_diff = (current_bid_time - tx_time).total_seconds() / 60
+    price = current_bid + minutes_diff * AUCTION_PRICE_PER_MIN
+    return round(max(price, AUCTION_MIN_PRICE), 4)
+
+
 def main():
     now = datetime.now(timezone.utc)
     period_end_dt = now
@@ -184,15 +227,15 @@ def main():
     after_iso = period_start_dt.strftime("%Y-%m-%dT%H:%M:%S")
     before_iso = period_end_dt.strftime("%Y-%m-%dT%H:%M:%S")
 
-    print(f"[i] AUCTION_START_DT = {AUCTION_START_DT}")
     print(f"[i] Запрашиваю переводы {TOKEN_CONTRACT}:transfer на {ACCOUNT}")
     print(f"[i] Период: {after_iso} .. {before_iso} (UTC)")
 
-    now_exp = expected_price_at(now.strftime("%Y-%m-%dT%H:%M:%S+00:00"))
-    if now_exp is not None:
-        print(f"[i] Ожидаемая цена редукциона сейчас: ${now_exp:.3f}")
+    # Получаем точную текущую цену редукциона из API
+    current_bid, current_bid_time = fetch_current_bid(AUCTION_TOURNAMENT_ID)
+    if current_bid is not None:
+        print(f"[i] Текущая цена редукциона: ${current_bid:.4f} (до {current_bid_time})")
     else:
-        print("[!] expected_price_at вернул None для текущего времени!")
+        print("[!] Не удалось получить текущую цену редукциона — подозрительные не будут определяться")
 
     raw_actions, used_endpoint, error_message = try_endpoints(
         ACCOUNT, TOKEN_CONTRACT, "transfer", after_iso, before_iso
@@ -226,13 +269,8 @@ def main():
     total_raw_count = len(transfers)
     print(f"[i] После фильтров: {total_raw_count} (вне диапазона: {skipped_out_of_range}, круглые: {skipped_round})")
 
+    # Сортировка по времени для seq_for_address
     transfers.sort(key=lambda t: t["timestamp_sort"] or "")
-
-    # Диагностика первой транзакции
-    if transfers:
-        t0 = transfers[0]
-        exp0 = expected_price_at(t0["timestamp_sort"])
-        print(f"[i] Первая транзакция: ts={t0['timestamp_sort']!r}, expected={exp0}, amount={t0['amount']}")
 
     per_address_count = {}
     filtered_rows = []
@@ -241,7 +279,7 @@ def main():
         count = per_address_count.get(addr, 0) + 1
         per_address_count[addr] = count
         if count <= MAX_PER_ADDRESS:
-            expected = expected_price_at(t["timestamp_sort"])
+            expected = expected_price_at(t["timestamp_sort"], current_bid, current_bid_time)
             diff = round(t["amount"] - expected, 4) if expected is not None else None
             t["seq_for_address"] = count
             t["expected_price"] = expected
@@ -249,7 +287,8 @@ def main():
             t["suspicious"] = (diff is not None and diff > SUSPICIOUS_THRESHOLD)
             filtered_rows.append(t)
 
-    filtered_rows.sort(key=lambda t: t["amount"], reverse=True)
+    # Сортировка по времени — новые сверху
+    filtered_rows.sort(key=lambda t: t["timestamp_sort"] or "", reverse=True)
 
     suspicious_count = sum(1 for r in filtered_rows if r.get("suspicious"))
     remainder_count = max(0, len(filtered_rows) - TOP_GROUP_SIZE - SECOND_GROUP_SIZE)
@@ -271,7 +310,7 @@ def main():
         "unique_addresses": len(per_address_count),
         "suspicious_count": suspicious_count,
         "remainder_count": remainder_count,
-        "current_auction_price": now_exp,
+        "current_auction_price": current_bid,
         "top_group_size": TOP_GROUP_SIZE,
         "second_group_size": SECOND_GROUP_SIZE,
         "suspicious_threshold": SUSPICIOUS_THRESHOLD,
