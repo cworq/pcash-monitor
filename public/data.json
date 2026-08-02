@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-08-03 01:15:30 (UTC+5)",
-  "period_start": "2026-07-27 01:15 (UTC+5)",
-  "period_end": "2026-08-03 01:15 (UTC+5)",
+  "generated_at": "2026-08-03 01:20:25 (UTC+5)",
+  "period_start": "2026-07-27 01:20 (UTC+5)",
+  "period_end": "2026-08-03 01:20 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 93,
+  "total_raw_count": 92,
   "unique_addresses": 89,
   "suspicious_count": 0,
   "remainder_count": 0,
@@ -140,20 +140,6 @@
       "suspicious": false
     },
     {
-      "from": "abyfn5.pcash",
-      "to": "4store.pcash",
-      "amount": 27.852,
-      "symbol": "USDCASH",
-      "memo": "order_id: 03a04aca-4f6e-4b22-9328-8cde640bfe39",
-      "timestamp": "2026-07-27 01:18 (UTC+5)",
-      "timestamp_sort": "2026-07-26T20:18:27.500",
-      "trx_id": "2868b16520955e1852cee9c3a07d586c2d9bcc05e0594ad6acef1f26f655869f",
-      "seq_for_address": 1,
-      "expected_price": null,
-      "price_diff": null,
-      "suspicious": false
-    },
-    {
       "from": "dimazz.pcash",
       "to": "4store.pcash",
       "amount": 27.758,
@@ -204,7 +190,7 @@
       "timestamp": "2026-07-27 02:02 (UTC+5)",
       "timestamp_sort": "2026-07-26T21:02:51.000",
       "trx_id": "cc18246beb09463638796cbde70869976a654e22cf0d98cc7a0d81315fcebda4",
-      "seq_for_address": 2,
+      "seq_for_address": 1,
       "expected_price": null,
       "price_diff": null,
       "suspicious": false
