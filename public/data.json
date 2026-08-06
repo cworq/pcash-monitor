@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-06 12:00:49 (UTC+5)",
-  "period_start": "2026-07-30 12:00 (UTC+5)",
-  "period_end": "2026-08-06 12:00 (UTC+5)",
+  "generated_at": "2026-08-06 12:05:26 (UTC+5)",
+  "period_start": "2026-07-30 12:05 (UTC+5)",
+  "period_end": "2026-08-06 12:05 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 2,
