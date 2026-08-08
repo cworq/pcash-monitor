@@ -25,7 +25,7 @@ ROUND_EPSILON = 1e-6
 TOP_GROUP_SIZE = 24
 SECOND_GROUP_SIZE = 96
 
-AUCTION_TOURNAMENT_ID = 28      # ID текущего турнира — обновляй при каждом новом турнире!
+AUCTION_TOURNAMENT_ID = 29      # ID текущего турнира — обновляй при каждом новом турнире!
 AUCTION_PRICE_PER_MIN = 0.005   # снижение цены за минуту ($)
 AUCTION_MIN_PRICE = 0.68        # минимальная цена редукциона
 SUSPICIOUS_THRESHOLD = 2.0      # допуск отклонения от ожидаемой цены ($)
