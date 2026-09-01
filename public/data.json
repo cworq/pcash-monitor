@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-02 01:05:18 (UTC+5)",
-  "period_start": "2026-08-26 01:05 (UTC+5)",
-  "period_end": "2026-09-02 01:05 (UTC+5)",
+  "generated_at": "2026-09-02 01:10:24 (UTC+5)",
+  "period_start": "2026-08-26 01:10 (UTC+5)",
+  "period_end": "2026-09-02 01:10 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 108,
   "unique_addresses": 104,
   "suspicious_count": 108,
   "remainder_count": 0,
-  "current_auction_price": 205.852,
+  "current_auction_price": 205.827,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -275,8 +275,8 @@
       "timestamp_sort": "2026-08-25T21:37:39.000",
       "trx_id": "958277656cd0b94ecc9d2462bcdfec24f37438ff2ad4c8ce3266fcf47a45756a",
       "seq_for_address": 1,
-      "expected_price": 255.7938,
-      "price_diff": -229.3198,
+      "expected_price": 255.7937,
+      "price_diff": -229.3197,
       "suspicious": true
     },
     {
@@ -737,8 +737,8 @@
       "timestamp_sort": "2026-08-26T11:28:51.000",
       "trx_id": "623f16429b6c4af28dc34d8e2c3ca16a59f932b81c0471b76f1e0fced28c474d",
       "seq_for_address": 1,
-      "expected_price": 251.6378,
-      "price_diff": -229.7268,
+      "expected_price": 251.6377,
+      "price_diff": -229.7267,
       "suspicious": true
     },
     {
@@ -1465,8 +1465,8 @@
       "timestamp_sort": "2026-08-27T19:32:15.000",
       "trx_id": "5ab114b170e54fe667a9cea505f3faabce1d3ae6ff8dc25f5711c584abfe12b9",
       "seq_for_address": 1,
-      "expected_price": 242.0208,
-      "price_diff": -230.6628,
+      "expected_price": 242.0207,
+      "price_diff": -230.6627,
       "suspicious": true
     },
     {
