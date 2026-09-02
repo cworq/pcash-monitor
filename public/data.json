@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-02 22:10:25 (UTC+5)",
-  "period_start": "2026-08-26 22:10 (UTC+5)",
-  "period_end": "2026-09-02 22:10 (UTC+5)",
+  "generated_at": "2026-09-02 22:15:27 (UTC+5)",
+  "period_start": "2026-08-26 22:15 (UTC+5)",
+  "period_end": "2026-09-02 22:15 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 51,
   "unique_addresses": 49,
   "suspicious_count": 51,
   "remainder_count": 0,
-  "current_auction_price": 199.724,
+  "current_auction_price": 199.699,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-08-30T15:16:21.000",
       "trx_id": "4a8f0fed1601db116b37162df9e6b1e07f66d6167c843b7236da65d8c945d26b",
       "seq_for_address": 1,
-      "expected_price": 221.8972,
-      "price_diff": -180.5072,
+      "expected_price": 221.8973,
+      "price_diff": -180.5073,
       "suspicious": true
     },
     {
@@ -65,8 +65,8 @@
       "timestamp_sort": "2026-08-31T14:31:45.000",
       "trx_id": "d7cd1da9c7486af2480212edb9e723d7f8884d39ce31fa947f06ad5df4211fdd",
       "seq_for_address": 2,
-      "expected_price": 214.9202,
-      "price_diff": -173.9102,
+      "expected_price": 214.9203,
+      "price_diff": -173.9103,
       "suspicious": true
     },
     {
@@ -289,8 +289,8 @@
       "timestamp_sort": "2026-08-26T18:43:15.000",
       "trx_id": "699425970a2e47dec7f9993f2620c54251608ed6bd88e0cd7c1087ce45fcd57e",
       "seq_for_address": 1,
-      "expected_price": 249.6627,
-      "price_diff": -230.1377,
+      "expected_price": 249.6628,
+      "price_diff": -230.1378,
       "suspicious": true
     },
     {
@@ -667,8 +667,8 @@
       "timestamp_sort": "2026-08-27T19:32:15.000",
       "trx_id": "5ab114b170e54fe667a9cea505f3faabce1d3ae6ff8dc25f5711c584abfe12b9",
       "seq_for_address": 1,
-      "expected_price": 242.2177,
-      "price_diff": -230.8597,
+      "expected_price": 242.2178,
+      "price_diff": -230.8598,
       "suspicious": true
     },
     {
