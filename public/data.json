@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-02 18:50:30 (UTC+5)",
-  "period_start": "2026-08-26 18:50 (UTC+5)",
-  "period_end": "2026-09-02 18:50 (UTC+5)",
+  "generated_at": "2026-09-02 18:55:19 (UTC+5)",
+  "period_start": "2026-08-26 18:55 (UTC+5)",
+  "period_end": "2026-09-02 18:55 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 63,
-  "unique_addresses": 61,
-  "suspicious_count": 63,
+  "total_raw_count": 62,
+  "unique_addresses": 60,
+  "suspicious_count": 62,
   "remainder_count": 0,
-  "current_auction_price": 200.693,
+  "current_auction_price": 200.668,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -39,20 +39,6 @@
       "seq_for_address": 1,
       "expected_price": 238.9621,
       "price_diff": -180.5221,
-      "suspicious": true
-    },
-    {
-      "from": "abxvsa.pcash",
-      "to": "4store.pcash",
-      "amount": 53.49,
-      "symbol": "USDCASH",
-      "memo": "order_id: 827a9c3a-2956-44ee-970c-0f51c899a052",
-      "timestamp": "2026-08-26 18:52 (UTC+5)",
-      "timestamp_sort": "2026-08-26T13:52:10.000",
-      "trx_id": "73f8d36766ac8c7d03cd7d1c0338e18e1150752384abd554a09357170b4e7ce6",
-      "seq_for_address": 1,
-      "expected_price": 251.0872,
-      "price_diff": -197.5972,
       "suspicious": true
     },
     {
@@ -149,8 +135,8 @@
       "timestamp_sort": "2026-08-27T22:24:09.000",
       "trx_id": "73bfdf157b09c2603857c63f03820c544a9b1d161e74fd264900a4cf80a3f5f6",
       "seq_for_address": 1,
-      "expected_price": 241.3273,
-      "price_diff": -200.9273,
+      "expected_price": 241.3272,
+      "price_diff": -200.9272,
       "suspicious": true
     },
     {
@@ -807,8 +793,8 @@
       "timestamp_sort": "2026-08-27T15:23:27.000",
       "trx_id": "515dd1d4ff920d4d51c07d5f63c5bd57c3012298670e21c2a0c916a2f3e4a616",
       "seq_for_address": 1,
-      "expected_price": 243.4308,
-      "price_diff": -230.7008,
+      "expected_price": 243.4307,
+      "price_diff": -230.7007,
       "suspicious": true
     },
     {
