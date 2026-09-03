@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-04 04:20:25 (UTC+5)",
-  "period_start": "2026-08-28 04:20 (UTC+5)",
-  "period_end": "2026-09-04 04:20 (UTC+5)",
+  "generated_at": "2026-09-04 04:25:17 (UTC+5)",
+  "period_start": "2026-08-28 04:25 (UTC+5)",
+  "period_end": "2026-09-04 04:25 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 12,
-  "unique_addresses": 11,
-  "suspicious_count": 12,
+  "total_raw_count": 10,
+  "unique_addresses": 9,
+  "suspicious_count": 10,
   "remainder_count": 0,
-  "current_auction_price": 190.956,
+  "current_auction_price": 190.931,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -37,8 +37,8 @@
       "timestamp_sort": "2026-08-30T15:16:21.000",
       "trx_id": "4a8f0fed1601db116b37162df9e6b1e07f66d6167c843b7236da65d8c945d26b",
       "seq_for_address": 1,
-      "expected_price": 222.1792,
-      "price_diff": -180.7892,
+      "expected_price": 222.1793,
+      "price_diff": -180.7893,
       "suspicious": true
     },
     {
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-08-31T14:31:45.000",
       "trx_id": "d7cd1da9c7486af2480212edb9e723d7f8884d39ce31fa947f06ad5df4211fdd",
       "seq_for_address": 2,
-      "expected_price": 215.2022,
-      "price_diff": -174.1922,
+      "expected_price": 215.2023,
+      "price_diff": -174.1923,
       "suspicious": true
     },
     {
@@ -151,34 +151,6 @@
       "seq_for_address": 1,
       "expected_price": 195.3625,
       "price_diff": -154.9625,
-      "suspicious": true
-    },
-    {
-      "from": "abye51.pcash",
-      "to": "4store.pcash",
-      "amount": 10.102,
-      "symbol": "USDCASH",
-      "memo": "order_id: 95bc95fc-0333-4d10-a8a7-991b199ee994",
-      "timestamp": "2026-08-28 04:21 (UTC+5)",
-      "timestamp_sort": "2026-08-27T23:21:33.500",
-      "trx_id": "61838179a0c836608ce9903994922a50bdf9cdece2bc1cf97c2f94b6439d1582",
-      "seq_for_address": 1,
-      "expected_price": 241.3532,
-      "price_diff": -231.2512,
-      "suspicious": true
-    },
-    {
-      "from": "milkyn.pcash",
-      "to": "4store.pcash",
-      "amount": 10.091,
-      "symbol": "USDCASH",
-      "memo": "order_id: ff46fa53-f4ac-40c2-8b47-9718fe20f5ee",
-      "timestamp": "2026-08-28 04:23 (UTC+5)",
-      "timestamp_sort": "2026-08-27T23:23:18.500",
-      "trx_id": "d4e407500b784fd1986b1d3b859a977faa6921c7cf7dc26d77dd39e6e6ce21ee",
-      "seq_for_address": 1,
-      "expected_price": 241.3445,
-      "price_diff": -231.2535,
       "suspicious": true
     }
   ]
