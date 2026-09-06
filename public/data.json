@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-07 02:40:21 (UTC+5)",
-  "period_start": "2026-08-31 02:40 (UTC+5)",
-  "period_end": "2026-09-07 02:40 (UTC+5)",
+  "generated_at": "2026-09-07 02:45:20 (UTC+5)",
+  "period_start": "2026-08-31 02:45 (UTC+5)",
+  "period_end": "2026-09-07 02:45 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 4,
   "unique_addresses": 4,
   "suspicious_count": 4,
   "remainder_count": 0,
-  "current_auction_price": 170.513,
+  "current_auction_price": 170.489,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -23,8 +23,8 @@
       "timestamp_sort": "2026-08-31T14:31:45.000",
       "trx_id": "d7cd1da9c7486af2480212edb9e723d7f8884d39ce31fa947f06ad5df4211fdd",
       "seq_for_address": 1,
-      "expected_price": 215.8593,
-      "price_diff": -174.8493,
+      "expected_price": 215.8603,
+      "price_diff": -174.8503,
       "suspicious": true
     },
     {
@@ -37,8 +37,8 @@
       "timestamp_sort": "2026-08-31T01:00:33.500",
       "trx_id": "cbebe1fecbe4aeb305881b44e785eb752c246d26f7cfba3c18d45d4e5f080e54",
       "seq_for_address": 1,
-      "expected_price": 219.9152,
-      "price_diff": -178.9252,
+      "expected_price": 219.9162,
+      "price_diff": -178.9262,
       "suspicious": true
     },
     {
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-08-31T17:04:03.500",
       "trx_id": "7655e334a90722049777c41720c341437549cf4a02a9db332160f76a3d09cd99",
       "seq_for_address": 1,
-      "expected_price": 215.0977,
-      "price_diff": -174.6977,
+      "expected_price": 215.0987,
+      "price_diff": -174.6987,
       "suspicious": true
     },
     {
@@ -65,8 +65,8 @@
       "timestamp_sort": "2026-09-03T08:39:41.500",
       "trx_id": "d73ad1309625aab7bb8c4fc0792776f12bc9c2172a9cd53e982b1a8ce8e9a654",
       "seq_for_address": 1,
-      "expected_price": 196.0195,
-      "price_diff": -155.6195,
+      "expected_price": 196.0205,
+      "price_diff": -155.6205,
       "suspicious": true
     }
   ]
