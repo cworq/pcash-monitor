@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-22 17:10:27 (UTC+5)",
-  "period_start": "2026-09-15 17:10 (UTC+5)",
-  "period_end": "2026-09-22 17:10 (UTC+5)",
+  "generated_at": "2026-09-22 17:15:23 (UTC+5)",
+  "period_start": "2026-09-15 17:15 (UTC+5)",
+  "period_end": "2026-09-22 17:15 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 4,
   "unique_addresses": 4,
   "suspicious_count": 4,
   "remainder_count": 0,
-  "current_auction_price": 61.664,
+  "current_auction_price": 61.64,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -23,8 +23,8 @@
       "timestamp_sort": "2026-09-20T18:30:30.500",
       "trx_id": "e3a05c7b8c57e875b11c1f90b7bc1997171d05027eda673a2661ec4dee5c4365",
       "seq_for_address": 1,
-      "expected_price": 74.1665,
-      "price_diff": -23.6765,
+      "expected_price": 74.1675,
+      "price_diff": -23.6775,
       "suspicious": true
     },
     {
@@ -37,8 +37,8 @@
       "timestamp_sort": "2026-09-16T13:08:42.000",
       "trx_id": "4545a43c8332a53ce6cb997d3f1fefc1b4706cdca54ec1fe1172db9c2ca75f5b",
       "seq_for_address": 1,
-      "expected_price": 104.5755,
-      "price_diff": -61.4555,
+      "expected_price": 104.5765,
+      "price_diff": -61.4565,
       "suspicious": true
     },
     {
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-09-21T10:46:34.500",
       "trx_id": "4ced0dd9cebbd4eaedd18d2b183791530e82f265600b83b07616a8e2e53c72eb",
       "seq_for_address": 1,
-      "expected_price": 69.2861,
-      "price_diff": -28.2961,
+      "expected_price": 69.2871,
+      "price_diff": -28.2971,
       "suspicious": true
     },
     {
@@ -65,8 +65,8 @@
       "timestamp_sort": "2026-09-20T21:27:08.500",
       "trx_id": "2ab2206e6f33d1fdc203b16e35fb4c9e24819dfe0d2e9171769551160f4b3501",
       "seq_for_address": 1,
-      "expected_price": 73.2833,
-      "price_diff": -32.8833,
+      "expected_price": 73.2843,
+      "price_diff": -32.8843,
       "suspicious": true
     }
   ]
