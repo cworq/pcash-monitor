@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-28 04:00:35 (UTC+5)",
-  "period_start": "2026-09-21 04:00 (UTC+5)",
-  "period_end": "2026-09-28 04:00 (UTC+5)",
+  "generated_at": "2026-09-28 04:05:19 (UTC+5)",
+  "period_start": "2026-09-21 04:05 (UTC+5)",
+  "period_end": "2026-09-28 04:05 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 58,
-  "unique_addresses": 58,
+  "total_raw_count": 60,
+  "unique_addresses": 60,
   "suspicious_count": 7,
   "remainder_count": 0,
-  "current_auction_price": 23.637,
+  "current_auction_price": 23.612,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -765,8 +765,8 @@
       "timestamp_sort": "2026-09-27T19:58:21.000",
       "trx_id": "5e4201d1b740ac2daf8ff7d6f3b41b2768e9b80e19a2f8cfc2856517bb43d87b",
       "seq_for_address": 1,
-      "expected_price": 24.5503,
-      "price_diff": -0.0273,
+      "expected_price": 24.5502,
+      "price_diff": -0.0272,
       "suspicious": false
     },
     {
@@ -812,6 +812,34 @@
       "suspicious": false
     },
     {
+      "from": "lilach.pcash",
+      "to": "4store.pcash",
+      "amount": 23.627,
+      "symbol": "USDCASH",
+      "memo": "order_id: adace876-c279-4c03-8425-7c1e5cb52bb5",
+      "timestamp": "2026-09-28 04:03 (UTC+5)",
+      "timestamp_sort": "2026-09-27T23:03:04.500",
+      "trx_id": "82397cf78c8faf14a18d513f98a6892d0c7f5f73295065a775dc4ebf5004b257",
+      "seq_for_address": 1,
+      "expected_price": 23.6266,
+      "price_diff": 0.0004,
+      "suspicious": false
+    },
+    {
+      "from": "amater.pcash",
+      "to": "4store.pcash",
+      "amount": 23.617,
+      "symbol": "USDCASH",
+      "memo": "order_id: b16b4b70-680b-45a5-ad8a-730b0f374eb4",
+      "timestamp": "2026-09-28 04:05 (UTC+5)",
+      "timestamp_sort": "2026-09-27T23:05:18.500",
+      "trx_id": "19f292289f06459ce6533b03a4dbd2de8b40135ad7b7648a2db010acba9c28bc",
+      "seq_for_address": 1,
+      "expected_price": 23.6155,
+      "price_diff": 0.0015,
+      "suspicious": false
+    },
+    {
       "from": "abyaof.pcash",
       "to": "4store.pcash",
       "amount": 12.822,
@@ -821,8 +849,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 27.7898,
-      "price_diff": -14.9678,
+      "expected_price": 27.7897,
+      "price_diff": -14.9677,
       "suspicious": true
     }
   ]
