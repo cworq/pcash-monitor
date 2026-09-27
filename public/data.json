@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-27 20:50:23 (UTC+5)",
-  "period_start": "2026-09-20 20:50 (UTC+5)",
-  "period_end": "2026-09-27 20:50 (UTC+5)",
+  "generated_at": "2026-09-27 20:55:19 (UTC+5)",
+  "period_start": "2026-09-20 20:55 (UTC+5)",
+  "period_end": "2026-09-27 20:55 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 37,
-  "unique_addresses": 37,
+  "total_raw_count": 38,
+  "unique_addresses": 38,
   "suspicious_count": 9,
   "remainder_count": 0,
-  "current_auction_price": 25.72,
+  "current_auction_price": 25.695,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -518,6 +518,20 @@
       "suspicious": false
     },
     {
+      "from": "abxyzo.pcash",
+      "to": "4store.pcash",
+      "amount": 25.72,
+      "symbol": "USDCASH",
+      "memo": "order_id: d60e7261-b5f2-45d0-8ca6-0f7599f95504",
+      "timestamp": "2026-09-27 20:50 (UTC+5)",
+      "timestamp_sort": "2026-09-27T15:50:54.500",
+      "trx_id": "8a3f6340e4a3fc34d4383a9fa04129ea39ea41300c7b58beec9608687b0d1b72",
+      "seq_for_address": 1,
+      "expected_price": 25.7205,
+      "price_diff": -0.0005,
+      "suspicious": false
+    },
+    {
       "from": "abyaof.pcash",
       "to": "4store.pcash",
       "amount": 12.822,
@@ -527,8 +541,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 27.7227,
-      "price_diff": -14.9007,
+      "expected_price": 27.7228,
+      "price_diff": -14.9008,
       "suspicious": true
     }
   ]
