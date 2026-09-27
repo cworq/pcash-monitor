@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-27 18:35:17 (UTC+5)",
-  "period_start": "2026-09-20 18:35 (UTC+5)",
-  "period_end": "2026-09-27 18:35 (UTC+5)",
+  "generated_at": "2026-09-27 18:40:21 (UTC+5)",
+  "period_start": "2026-09-20 18:40 (UTC+5)",
+  "period_end": "2026-09-27 18:40 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 35,
   "unique_addresses": 35,
   "suspicious_count": 9,
   "remainder_count": 0,
-  "current_auction_price": 26.374,
+  "current_auction_price": 26.349,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -499,8 +499,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 27.7017,
-      "price_diff": -14.8797,
+      "expected_price": 27.7018,
+      "price_diff": -14.8798,
       "suspicious": true
     }
   ]
