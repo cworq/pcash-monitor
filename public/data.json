@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-28 19:05:21 (UTC+5)",
-  "period_start": "2026-09-21 19:05 (UTC+5)",
-  "period_end": "2026-09-28 19:05 (UTC+5)",
+  "generated_at": "2026-09-28 19:10:25 (UTC+5)",
+  "period_start": "2026-09-21 19:10 (UTC+5)",
+  "period_end": "2026-09-28 19:10 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 131,
-  "unique_addresses": 128,
+  "total_raw_count": 134,
+  "unique_addresses": 131,
   "suspicious_count": 5,
-  "remainder_count": 11,
-  "current_auction_price": 19.253,
+  "remainder_count": 14,
+  "current_auction_price": 19.228,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-09-23T09:57:15.000",
       "trx_id": "3ff6219fccf803e1a11d14cb28d8cc2affeafe9aca2e7b4f2f1e4e2fd4e6469c",
       "seq_for_address": 1,
-      "expected_price": 56.4967,
-      "price_diff": -1.1597,
+      "expected_price": 56.4968,
+      "price_diff": -1.1598,
       "suspicious": false
     },
     {
@@ -1227,8 +1227,8 @@
       "timestamp_sort": "2026-09-28T08:55:27.000",
       "trx_id": "4050e5b0070d8d2996ab2750db9ba88a1e9a404174630b51c8f5cfc01e6d2929",
       "seq_for_address": 1,
-      "expected_price": 20.8057,
-      "price_diff": -0.0517,
+      "expected_price": 20.8058,
+      "price_diff": -0.0518,
       "suspicious": false
     },
     {
@@ -1549,8 +1549,8 @@
       "timestamp_sort": "2026-09-28T12:44:39.000",
       "trx_id": "607b620f0db64d5907b1fd9def68c96506daba934053c5282ee15b6c1d375078",
       "seq_for_address": 1,
-      "expected_price": 19.6597,
-      "price_diff": -0.0047,
+      "expected_price": 19.6598,
+      "price_diff": -0.0048,
       "suspicious": false
     },
     {
@@ -1745,8 +1745,8 @@
       "timestamp_sort": "2026-09-28T13:12:27.000",
       "trx_id": "7fce0bec29a19f9eed16b5e034f3b2bf258362d795ae780257f61119cd56bb66",
       "seq_for_address": 1,
-      "expected_price": 19.5207,
-      "price_diff": -0.0117,
+      "expected_price": 19.5208,
+      "price_diff": -0.0118,
       "suspicious": false
     },
     {
@@ -1834,6 +1834,48 @@
       "suspicious": false
     },
     {
+      "from": "sorrow.pcash",
+      "to": "4store.pcash",
+      "amount": 19.248,
+      "symbol": "USDCASH",
+      "memo": "order_id: bb206000-7518-489d-acd2-ae188a0167c0",
+      "timestamp": "2026-09-28 19:06 (UTC+5)",
+      "timestamp_sort": "2026-09-28T14:06:48.000",
+      "trx_id": "9598126b3263b10cb0e891961b40291f98d50efc907b1f7dcf7c98cdad316407",
+      "seq_for_address": 1,
+      "expected_price": 19.249,
+      "price_diff": -0.001,
+      "suspicious": false
+    },
+    {
+      "from": "pakoxd.pcash",
+      "to": "4store.pcash",
+      "amount": 19.248,
+      "symbol": "USDCASH",
+      "memo": "order_id: 0d09d76a-0660-4ccb-bc2a-25bb6060374b",
+      "timestamp": "2026-09-28 19:08 (UTC+5)",
+      "timestamp_sort": "2026-09-28T14:08:02.000",
+      "trx_id": "6bc40b07ccd8bba70c378c2c07fa021dbd1f304cf0a247d1af336c4c0171c84b",
+      "seq_for_address": 1,
+      "expected_price": 19.2428,
+      "price_diff": 0.0052,
+      "suspicious": false
+    },
+    {
+      "from": "wgm4ik.pcash",
+      "to": "4store.pcash",
+      "amount": 19.243,
+      "symbol": "USDCASH",
+      "memo": "order_id: 6b40962a-3d26-4668-b898-5b405117da5e",
+      "timestamp": "2026-09-28 19:08 (UTC+5)",
+      "timestamp_sort": "2026-09-28T14:08:08.500",
+      "trx_id": "8564bb7317f3a9e4762a1e79a548e4e06cf3d44d85f8aa3658452e531845d34e",
+      "seq_for_address": 1,
+      "expected_price": 19.2423,
+      "price_diff": 0.0007,
+      "suspicious": false
+    },
+    {
       "from": "abyaof.pcash",
       "to": "4store.pcash",
       "amount": 12.822,
@@ -1843,8 +1885,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 27.9307,
-      "price_diff": -15.1087,
+      "expected_price": 27.9308,
+      "price_diff": -15.1088,
       "suspicious": true
     }
   ]
