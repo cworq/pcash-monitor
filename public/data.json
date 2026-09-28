@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-28 18:20:24 (UTC+5)",
-  "period_start": "2026-09-21 18:20 (UTC+5)",
-  "period_end": "2026-09-28 18:20 (UTC+5)",
+  "generated_at": "2026-09-28 18:25:21 (UTC+5)",
+  "period_start": "2026-09-21 18:25 (UTC+5)",
+  "period_end": "2026-09-28 18:25 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 126,
-  "unique_addresses": 123,
+  "total_raw_count": 128,
+  "unique_addresses": 125,
   "suspicious_count": 5,
-  "remainder_count": 6,
-  "current_auction_price": 19.471,
+  "remainder_count": 8,
+  "current_auction_price": 19.446,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -751,8 +751,8 @@
       "timestamp_sort": "2026-09-27T19:58:21.000",
       "trx_id": "5e4201d1b740ac2daf8ff7d6f3b41b2768e9b80e19a2f8cfc2856517bb43d87b",
       "seq_for_address": 1,
-      "expected_price": 24.6842,
-      "price_diff": -0.1612,
+      "expected_price": 24.6843,
+      "price_diff": -0.1613,
       "suspicious": false
     },
     {
@@ -1227,8 +1227,8 @@
       "timestamp_sort": "2026-09-28T08:55:27.000",
       "trx_id": "4050e5b0070d8d2996ab2750db9ba88a1e9a404174630b51c8f5cfc01e6d2929",
       "seq_for_address": 1,
-      "expected_price": 20.7987,
-      "price_diff": -0.0447,
+      "expected_price": 20.7988,
+      "price_diff": -0.0448,
       "suspicious": false
     },
     {
@@ -1269,8 +1269,8 @@
       "timestamp_sort": "2026-09-28T09:13:09.000",
       "trx_id": "1de77b8b9f6b0aff78e33419a7ef7cddccbc28e12ebeefa045fe833d70c5cbee",
       "seq_for_address": 1,
-      "expected_price": 20.7102,
-      "price_diff": -0.0382,
+      "expected_price": 20.7103,
+      "price_diff": -0.0383,
       "suspicious": false
     },
     {
@@ -1759,8 +1759,36 @@
       "timestamp_sort": "2026-09-28T13:19:33.000",
       "trx_id": "f69873d53208622d266fc708fa6c5f142986e45b8f141830c28c09261229d644",
       "seq_for_address": 1,
-      "expected_price": 19.4782,
-      "price_diff": -0.0022,
+      "expected_price": 19.4783,
+      "price_diff": -0.0023,
+      "suspicious": false
+    },
+    {
+      "from": "jeff24.pcash",
+      "to": "4store.pcash",
+      "amount": 19.471,
+      "symbol": "USDCASH",
+      "memo": "order_id: f2cd636c-fc53-4d02-93cc-6809da3f9611",
+      "timestamp": "2026-09-28 18:21 (UTC+5)",
+      "timestamp_sort": "2026-09-28T13:21:39.500",
+      "trx_id": "23c100d30e05445e22536fce2e30e5e3d59facc4df52df00f6cd7274585e0bb7",
+      "seq_for_address": 1,
+      "expected_price": 19.4677,
+      "price_diff": 0.0033,
+      "suspicious": false
+    },
+    {
+      "from": "abxxer.pcash",
+      "to": "4store.pcash",
+      "amount": 19.451,
+      "symbol": "USDCASH",
+      "memo": "order_id: 384887b0-3d31-4f5d-abe8-99239239d1f9",
+      "timestamp": "2026-09-28 18:25 (UTC+5)",
+      "timestamp_sort": "2026-09-28T13:25:14.500",
+      "trx_id": "491610fb183da6876dd2a000bc0dc98ed195db458b7bb9b0cb615c51f1e52091",
+      "seq_for_address": 1,
+      "expected_price": 19.4498,
+      "price_diff": 0.0012,
       "suspicious": false
     },
     {
@@ -1773,8 +1801,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 27.9237,
-      "price_diff": -15.1017,
+      "expected_price": 27.9238,
+      "price_diff": -15.1018,
       "suspicious": true
     }
   ]
