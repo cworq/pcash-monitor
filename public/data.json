@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-28 19:50:25 (UTC+5)",
-  "period_start": "2026-09-21 19:50 (UTC+5)",
-  "period_end": "2026-09-28 19:50 (UTC+5)",
+  "generated_at": "2026-09-28 19:55:18 (UTC+5)",
+  "period_start": "2026-09-21 19:55 (UTC+5)",
+  "period_end": "2026-09-28 19:55 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 137,
-  "unique_addresses": 134,
+  "total_raw_count": 138,
+  "unique_addresses": 135,
   "suspicious_count": 5,
-  "remainder_count": 17,
-  "current_auction_price": 19.035,
+  "remainder_count": 18,
+  "current_auction_price": 19.01,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -1185,8 +1185,8 @@
       "timestamp_sort": "2026-09-28T08:33:21.000",
       "trx_id": "c14eb9eae1ed53a33e93cbb7810452726ab7adbc4109163bda113c045a01b81a",
       "seq_for_address": 1,
-      "expected_price": 20.9232,
-      "price_diff": -0.0432,
+      "expected_price": 20.9233,
+      "price_diff": -0.0433,
       "suspicious": false
     },
     {
@@ -1759,8 +1759,8 @@
       "timestamp_sort": "2026-09-28T13:19:33.000",
       "trx_id": "f69873d53208622d266fc708fa6c5f142986e45b8f141830c28c09261229d644",
       "seq_for_address": 1,
-      "expected_price": 19.4922,
-      "price_diff": -0.0162,
+      "expected_price": 19.4923,
+      "price_diff": -0.0163,
       "suspicious": false
     },
     {
@@ -1915,6 +1915,20 @@
       "seq_for_address": 1,
       "expected_price": 19.099,
       "price_diff": -0.001,
+      "suspicious": false
+    },
+    {
+      "from": "x5kgot.pcash",
+      "to": "4store.pcash",
+      "amount": 19.04,
+      "symbol": "USDCASH",
+      "memo": "order_id: b3f9c242-3281-4b2b-9b8b-73c870cb7205",
+      "timestamp": "2026-09-28 19:51 (UTC+5)",
+      "timestamp_sort": "2026-09-28T14:51:07.000",
+      "trx_id": "8e37cd421eca593eb915b5366d71856c1a346d3c92e8a36cc7ed22a760f1945b",
+      "seq_for_address": 1,
+      "expected_price": 19.0344,
+      "price_diff": 0.0056,
       "suspicious": false
     },
     {
