@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-29 05:40:23 (UTC+5)",
-  "period_start": "2026-09-22 05:40 (UTC+5)",
-  "period_end": "2026-09-29 05:40 (UTC+5)",
+  "generated_at": "2026-09-29 05:45:21 (UTC+5)",
+  "period_start": "2026-09-22 05:45 (UTC+5)",
+  "period_end": "2026-09-29 05:45 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 157,
   "unique_addresses": 154,
   "suspicious_count": 5,
   "remainder_count": 37,
-  "current_auction_price": 16.177,
+  "current_auction_price": 16.152,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -93,8 +93,8 @@
       "timestamp_sort": "2026-09-23T23:53:45.000",
       "trx_id": "04182dd8e883a90a66c7399cce234632f7378482b2b5ebf280a1120622bc8136",
       "seq_for_address": 1,
-      "expected_price": 52.4132,
-      "price_diff": -1.1262,
+      "expected_price": 52.4133,
+      "price_diff": -1.1263,
       "suspicious": false
     },
     {
@@ -1157,8 +1157,8 @@
       "timestamp_sort": "2026-09-28T08:13:51.000",
       "trx_id": "5ec4b6c7737d0787ea1cfb41870d3b489101163d2909f84a00a7b03ace40fb53",
       "seq_for_address": 1,
-      "expected_price": 21.1127,
-      "price_diff": -0.1497,
+      "expected_price": 21.1128,
+      "price_diff": -0.1498,
       "suspicious": false
     },
     {
@@ -1549,8 +1549,8 @@
       "timestamp_sort": "2026-09-28T12:44:39.000",
       "trx_id": "607b620f0db64d5907b1fd9def68c96506daba934053c5282ee15b6c1d375078",
       "seq_for_address": 1,
-      "expected_price": 19.7587,
-      "price_diff": -0.1037,
+      "expected_price": 19.7588,
+      "price_diff": -0.1038,
       "suspicious": false
     },
     {
@@ -2137,8 +2137,8 @@
       "timestamp_sort": "2026-09-28T19:09:21.000",
       "trx_id": "e94b63cb1f48bd15f0e17e19e965b27f60be0fde7450f26129026caf3d97ab31",
       "seq_for_address": 1,
-      "expected_price": 17.8352,
-      "price_diff": -0.0502,
+      "expected_price": 17.8353,
+      "price_diff": -0.0503,
       "suspicious": false
     },
     {
