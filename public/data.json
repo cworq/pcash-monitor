@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-29 17:00:40 (UTC+5)",
-  "period_start": "2026-09-22 17:00 (UTC+5)",
-  "period_end": "2026-09-29 17:00 (UTC+5)",
+  "generated_at": "2026-09-29 17:05:19 (UTC+5)",
+  "period_start": "2026-09-22 17:05 (UTC+5)",
+  "period_end": "2026-09-29 17:05 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 169,
   "unique_addresses": 165,
   "suspicious_count": 6,
   "remainder_count": 49,
-  "current_auction_price": 12.883,
+  "current_auction_price": 12.858,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -1199,8 +1199,8 @@
       "timestamp_sort": "2026-09-28T08:33:21.000",
       "trx_id": "c14eb9eae1ed53a33e93cbb7810452726ab7adbc4109163bda113c045a01b81a",
       "seq_for_address": 1,
-      "expected_price": 21.1212,
-      "price_diff": -0.2412,
+      "expected_price": 21.1213,
+      "price_diff": -0.2413,
       "suspicious": false
     },
     {
@@ -1759,8 +1759,8 @@
       "timestamp_sort": "2026-09-28T13:12:27.000",
       "trx_id": "7fce0bec29a19f9eed16b5e034f3b2bf258362d795ae780257f61119cd56bb66",
       "seq_for_address": 1,
-      "expected_price": 19.7257,
-      "price_diff": -0.2167,
+      "expected_price": 19.7258,
+      "price_diff": -0.2168,
       "suspicious": false
     },
     {
@@ -2291,8 +2291,8 @@
       "timestamp_sort": "2026-09-29T09:03:51.000",
       "trx_id": "b7c183688f9eac9751a04a9171c6c46f05c166b8b72af96dd80ccaff2eb8f149",
       "seq_for_address": 1,
-      "expected_price": 13.7687,
-      "price_diff": -0.0137,
+      "expected_price": 13.7688,
+      "price_diff": -0.0138,
       "suspicious": false
     },
     {
@@ -2361,8 +2361,8 @@
       "timestamp_sort": "2026-09-29T11:27:39.000",
       "trx_id": "82304aa1b95c9eb40bc04ead2218c53fc6a2979bccb3abdb0a9688a4e04b0c50",
       "seq_for_address": 1,
-      "expected_price": 13.0497,
-      "price_diff": -0.0077,
+      "expected_price": 13.0498,
+      "price_diff": -0.0078,
       "suspicious": false
     },
     {
