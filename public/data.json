@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-30 10:20:25 (UTC+5)",
-  "period_start": "2026-09-23 10:20 (UTC+5)",
-  "period_end": "2026-09-30 10:20 (UTC+5)",
+  "generated_at": "2026-09-30 10:25:18 (UTC+5)",
+  "period_start": "2026-09-23 10:25 (UTC+5)",
+  "period_end": "2026-09-30 10:25 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 173,
   "unique_addresses": 168,
   "suspicious_count": 7,
   "remainder_count": 53,
-  "current_auction_price": 7.845,
+  "current_auction_price": 7.82,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -1199,8 +1199,8 @@
       "timestamp_sort": "2026-09-28T08:33:21.000",
       "trx_id": "c14eb9eae1ed53a33e93cbb7810452726ab7adbc4109163bda113c045a01b81a",
       "seq_for_address": 1,
-      "expected_price": 21.2832,
-      "price_diff": -0.4032,
+      "expected_price": 21.2833,
+      "price_diff": -0.4033,
       "suspicious": false
     },
     {
@@ -1913,8 +1913,8 @@
       "timestamp_sort": "2026-09-28T14:36:39.000",
       "trx_id": "8663cdd5cf28e6bd6b999d246cb71f4ef469ec11972a60a3e60e78b36068c5ab",
       "seq_for_address": 1,
-      "expected_price": 19.4668,
-      "price_diff": -0.3638,
+      "expected_price": 19.4667,
+      "price_diff": -0.3637,
       "suspicious": false
     },
     {
@@ -2151,8 +2151,8 @@
       "timestamp_sort": "2026-09-28T19:09:21.000",
       "trx_id": "e94b63cb1f48bd15f0e17e19e965b27f60be0fde7450f26129026caf3d97ab31",
       "seq_for_address": 1,
-      "expected_price": 18.1032,
-      "price_diff": -0.3182,
+      "expected_price": 18.1033,
+      "price_diff": -0.3183,
       "suspicious": false
     },
     {
@@ -2361,8 +2361,8 @@
       "timestamp_sort": "2026-09-29T11:27:39.000",
       "trx_id": "82304aa1b95c9eb40bc04ead2218c53fc6a2979bccb3abdb0a9688a4e04b0c50",
       "seq_for_address": 1,
-      "expected_price": 13.2117,
-      "price_diff": -0.1697,
+      "expected_price": 13.2118,
+      "price_diff": -0.1698,
       "suspicious": false
     },
     {
