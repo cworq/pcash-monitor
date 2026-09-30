@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-30 16:00:37 (UTC+5)",
-  "period_start": "2026-09-23 16:00 (UTC+5)",
-  "period_end": "2026-09-30 16:00 (UTC+5)",
+  "generated_at": "2026-09-30 16:05:17 (UTC+5)",
+  "period_start": "2026-09-23 16:05 (UTC+5)",
+  "period_end": "2026-09-30 16:05 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 172,
   "unique_addresses": 167,
   "suspicious_count": 8,
   "remainder_count": 52,
-  "current_auction_price": 6.198,
+  "current_auction_price": 6.173,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -751,8 +751,8 @@
       "timestamp_sort": "2026-09-27T19:58:21.000",
       "trx_id": "5e4201d1b740ac2daf8ff7d6f3b41b2768e9b80e19a2f8cfc2856517bb43d87b",
       "seq_for_address": 1,
-      "expected_price": 25.1113,
-      "price_diff": -0.5883,
+      "expected_price": 25.1112,
+      "price_diff": -0.5882,
       "suspicious": false
     },
     {
@@ -919,8 +919,8 @@
       "timestamp_sort": "2026-09-28T04:12:33.000",
       "trx_id": "94ade89b534b6040ed01336289d41a26f472abece45f0aab85ad079ec1369bdd",
       "seq_for_address": 1,
-      "expected_price": 22.6402,
-      "price_diff": -0.5102,
+      "expected_price": 22.6403,
+      "price_diff": -0.5103,
       "suspicious": false
     },
     {
@@ -1759,8 +1759,8 @@
       "timestamp_sort": "2026-09-28T13:19:33.000",
       "trx_id": "f69873d53208622d266fc708fa6c5f142986e45b8f141830c28c09261229d644",
       "seq_for_address": 1,
-      "expected_price": 19.9053,
-      "price_diff": -0.4293,
+      "expected_price": 19.9052,
+      "price_diff": -0.4292,
       "suspicious": false
     },
     {
@@ -2361,8 +2361,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 28.3508,
-      "price_diff": -15.5288,
+      "expected_price": 28.3507,
+      "price_diff": -15.5287,
       "suspicious": true
     },
     {
