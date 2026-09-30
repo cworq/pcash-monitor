@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-09-30 17:05:17 (UTC+5)",
-  "period_start": "2026-09-23 17:05 (UTC+5)",
-  "period_end": "2026-09-30 17:05 (UTC+5)",
+  "generated_at": "2026-09-30 17:10:25 (UTC+5)",
+  "period_start": "2026-09-23 17:10 (UTC+5)",
+  "period_end": "2026-09-30 17:10 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 172,
   "unique_addresses": 167,
   "suspicious_count": 8,
   "remainder_count": 52,
-  "current_auction_price": 5.883,
+  "current_auction_price": 5.858,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -1745,8 +1745,8 @@
       "timestamp_sort": "2026-09-28T13:12:27.000",
       "trx_id": "7fce0bec29a19f9eed16b5e034f3b2bf258362d795ae780257f61119cd56bb66",
       "seq_for_address": 1,
-      "expected_price": 19.9508,
-      "price_diff": -0.4418,
+      "expected_price": 19.9507,
+      "price_diff": -0.4417,
       "suspicious": false
     },
     {
@@ -2277,8 +2277,8 @@
       "timestamp_sort": "2026-09-29T09:03:51.000",
       "trx_id": "b7c183688f9eac9751a04a9171c6c46f05c166b8b72af96dd80ccaff2eb8f149",
       "seq_for_address": 1,
-      "expected_price": 13.9938,
-      "price_diff": -0.2388,
+      "expected_price": 13.9937,
+      "price_diff": -0.2387,
       "suspicious": false
     },
     {
@@ -2347,8 +2347,8 @@
       "timestamp_sort": "2026-09-29T11:27:39.000",
       "trx_id": "82304aa1b95c9eb40bc04ead2218c53fc6a2979bccb3abdb0a9688a4e04b0c50",
       "seq_for_address": 1,
-      "expected_price": 13.2748,
-      "price_diff": -0.2328,
+      "expected_price": 13.2747,
+      "price_diff": -0.2327,
       "suspicious": false
     },
     {
@@ -2361,8 +2361,8 @@
       "timestamp_sort": "2026-09-27T09:10:27.000",
       "trx_id": "08ec4f0df41c9954d20a4f9df2e63e9a219852f610e656d281131149ba244226",
       "seq_for_address": 1,
-      "expected_price": 28.3607,
-      "price_diff": -15.5387,
+      "expected_price": 28.3608,
+      "price_diff": -15.5388,
       "suspicious": true
     },
     {
