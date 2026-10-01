@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-01 08:35:18 (UTC+5)",
-  "period_start": "2026-09-24 08:35 (UTC+5)",
-  "period_end": "2026-10-01 08:35 (UTC+5)",
+  "generated_at": "2026-10-01 08:40:21 (UTC+5)",
+  "period_start": "2026-09-24 08:40 (UTC+5)",
+  "period_end": "2026-10-01 08:40 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 170,
   "unique_addresses": 165,
   "suspicious_count": 8,
   "remainder_count": 50,
-  "current_auction_price": 1.378,
+  "current_auction_price": 1.353,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -1241,8 +1241,8 @@
       "timestamp_sort": "2026-09-28T09:13:09.000",
       "trx_id": "1de77b8b9f6b0aff78e33419a7ef7cddccbc28e12ebeefa045fe833d70c5cbee",
       "seq_for_address": 1,
-      "expected_price": 21.2922,
-      "price_diff": -0.6202,
+      "expected_price": 21.2923,
+      "price_diff": -0.6203,
       "suspicious": false
     },
     {
@@ -1871,8 +1871,8 @@
       "timestamp_sort": "2026-09-28T14:36:39.000",
       "trx_id": "8663cdd5cf28e6bd6b999d246cb71f4ef469ec11972a60a3e60e78b36068c5ab",
       "seq_for_address": 1,
-      "expected_price": 19.6747,
-      "price_diff": -0.5717,
+      "expected_price": 19.6748,
+      "price_diff": -0.5718,
       "suspicious": false
     },
     {
@@ -2249,8 +2249,8 @@
       "timestamp_sort": "2026-09-29T09:03:51.000",
       "trx_id": "b7c183688f9eac9751a04a9171c6c46f05c166b8b72af96dd80ccaff2eb8f149",
       "seq_for_address": 1,
-      "expected_price": 14.1388,
-      "price_diff": -0.3838,
+      "expected_price": 14.1387,
+      "price_diff": -0.3837,
       "suspicious": false
     },
     {
@@ -2319,8 +2319,8 @@
       "timestamp_sort": "2026-09-29T11:27:39.000",
       "trx_id": "82304aa1b95c9eb40bc04ead2218c53fc6a2979bccb3abdb0a9688a4e04b0c50",
       "seq_for_address": 1,
-      "expected_price": 13.4198,
-      "price_diff": -0.3778,
+      "expected_price": 13.4197,
+      "price_diff": -0.3777,
       "suspicious": false
     },
     {
