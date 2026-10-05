@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-05 15:50:22 (UTC+5)",
-  "period_start": "2026-09-28 15:50 (UTC+5)",
-  "period_end": "2026-10-05 15:50 (UTC+5)",
+  "generated_at": "2026-10-05 15:55:19 (UTC+5)",
+  "period_start": "2026-09-28 15:55 (UTC+5)",
+  "period_end": "2026-10-05 15:55 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 85,
+  "total_raw_count": 84,
   "unique_addresses": 81,
   "suspicious_count": 0,
   "remainder_count": 0,
@@ -64,7 +64,7 @@
       "timestamp": "2026-09-29 06:34 (UTC+5)",
       "timestamp_sort": "2026-09-29T01:34:07.000",
       "trx_id": "3f67daa2bf291ece01023ef3b1b1425f036372b366e6a3556cb4ed4df1718f36",
-      "seq_for_address": 2,
+      "seq_for_address": 1,
       "expected_price": null,
       "price_diff": null,
       "suspicious": false
@@ -121,20 +121,6 @@
       "timestamp_sort": "2026-10-05T08:56:09.000",
       "trx_id": "789ea22dafbd1510fd5eb1de726d18399639aea2ea34d8b3a87f691db92d8eba",
       "seq_for_address": 2,
-      "expected_price": null,
-      "price_diff": null,
-      "suspicious": false
-    },
-    {
-      "from": "timurb.pcash",
-      "to": "4store.pcash",
-      "amount": 20.178,
-      "symbol": "USDCASH",
-      "memo": "order_id: 71f98c99-3ca7-4ae8-b6af-e03ba88a0edb",
-      "timestamp": "2026-09-28 15:55 (UTC+5)",
-      "timestamp_sort": "2026-09-28T10:55:07.500",
-      "trx_id": "84fea34065110867c3b11ea6055a7d0cf2a792fe6dd8c1a35172e16dda2d819f",
-      "seq_for_address": 1,
       "expected_price": null,
       "price_diff": null,
       "suspicious": false
@@ -1198,7 +1184,7 @@
       "timestamp": "2026-09-29 22:16 (UTC+5)",
       "timestamp_sort": "2026-09-29T17:16:23.500",
       "trx_id": "c105679a989211755637f57b0b124310de03927ae530b6d30ca2397c81f2170b",
-      "seq_for_address": 3,
+      "seq_for_address": 2,
       "expected_price": null,
       "price_diff": null,
       "suspicious": false
