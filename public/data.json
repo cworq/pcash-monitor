@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-07 20:25:21 (UTC+5)",
-  "period_start": "2026-09-30 20:25 (UTC+5)",
-  "period_end": "2026-10-07 20:25 (UTC+5)",
+  "generated_at": "2026-10-07 20:30:32 (UTC+5)",
+  "period_start": "2026-09-30 20:30 (UTC+5)",
+  "period_end": "2026-10-07 20:30 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 11,
+  "total_raw_count": 10,
   "unique_addresses": 7,
   "suspicious_count": 0,
   "remainder_count": 0,
@@ -42,20 +42,6 @@
       "suspicious": false
     },
     {
-      "from": "551115.pcash",
-      "to": "4store.pcash",
-      "amount": 50.09,
-      "symbol": "USDCASH",
-      "memo": "order_id: 0f1267e6-0d55-456f-967f-9566e2d62050",
-      "timestamp": "2026-09-30 20:30 (UTC+5)",
-      "timestamp_sort": "2026-09-30T15:30:12.000",
-      "trx_id": "c1b37484cf301fd2898e30cbf9006bcc35c9127c64f2858e03eaca7fb47f2394",
-      "seq_for_address": 1,
-      "expected_price": null,
-      "price_diff": null,
-      "suspicious": false
-    },
-    {
       "from": "ca3you.pcash",
       "to": "4store.pcash",
       "amount": 49.99,
@@ -78,7 +64,7 @@
       "timestamp": "2026-10-06 02:27 (UTC+5)",
       "timestamp_sort": "2026-10-05T21:27:43.500",
       "trx_id": "d96f0e312ddaf0c53dd60466722515c4376bffc18d8ce1b3330ca6843fc4d128",
-      "seq_for_address": 2,
+      "seq_for_address": 1,
       "expected_price": null,
       "price_diff": null,
       "suspicious": false
