@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-22 19:10:28 (UTC+5)",
-  "period_start": "2026-10-15 19:10 (UTC+5)",
-  "period_end": "2026-10-22 19:10 (UTC+5)",
+  "generated_at": "2026-10-22 19:15:27 (UTC+5)",
+  "period_start": "2026-10-15 19:15 (UTC+5)",
+  "period_end": "2026-10-22 19:15 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
-  "total_raw_count": 22,
-  "unique_addresses": 21,
-  "suspicious_count": 22,
+  "total_raw_count": 21,
+  "unique_addresses": 20,
+  "suspicious_count": 21,
   "remainder_count": 0,
-  "current_auction_price": 176.87,
+  "current_auction_price": 176.806,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -23,8 +23,8 @@
       "timestamp_sort": "2026-10-19T12:47:55.500",
       "trx_id": "43926b5be6bc7e08aba3dab6b8da16b8c765357d80dd5432f05ef78385f505f2",
       "seq_for_address": 1,
-      "expected_price": 220.9008,
-      "price_diff": -166.1108,
+      "expected_price": 220.8868,
+      "price_diff": -166.0968,
       "suspicious": true
     },
     {
@@ -37,8 +37,8 @@
       "timestamp_sort": "2026-10-17T16:56:43.000",
       "trx_id": "b535d686896e8ddc19756ad256709b8e1d97cc9b354de4e8b1c5db05f436b23f",
       "seq_for_address": 1,
-      "expected_price": 247.2128,
-      "price_diff": -206.2228,
+      "expected_price": 247.1988,
+      "price_diff": -206.2088,
       "suspicious": true
     },
     {
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-10-17T16:59:40.000",
       "trx_id": "33c44660b1effef92f307de1823ca47795978a293701e534c3291f4031f3fd64",
       "seq_for_address": 2,
-      "expected_price": 247.1833,
-      "price_diff": -206.1933,
+      "expected_price": 247.1693,
+      "price_diff": -206.1793,
       "suspicious": true
     },
     {
@@ -65,8 +65,8 @@
       "timestamp_sort": "2026-10-20T13:32:38.000",
       "trx_id": "ffef00a8e1ef14db77fcfad8290c28014d4e9af292f8dc57aa527d94195088af",
       "seq_for_address": 1,
-      "expected_price": 206.0537,
-      "price_diff": -165.0637,
+      "expected_price": 206.0397,
+      "price_diff": -165.0497,
       "suspicious": true
     },
     {
@@ -79,8 +79,8 @@
       "timestamp_sort": "2026-10-19T10:32:58.000",
       "trx_id": "a6baafb5f7bde3023c7516c7ad3ec7f841ecba2ce2195a8e5025eeaa2609cd76",
       "seq_for_address": 1,
-      "expected_price": 222.2503,
-      "price_diff": -181.7603,
+      "expected_price": 222.2363,
+      "price_diff": -181.7463,
       "suspicious": true
     },
     {
@@ -93,22 +93,8 @@
       "timestamp_sort": "2026-10-17T13:02:34.000",
       "trx_id": "a42c640fb4c3a5f2e1b97d481c2b4925498aa9a428b50508a88b877542b49eb1",
       "seq_for_address": 1,
-      "expected_price": 249.5543,
-      "price_diff": -209.1543,
-      "suspicious": true
-    },
-    {
-      "from": "wannab.pcash",
-      "to": "4store.pcash",
-      "amount": 16.516,
-      "symbol": "USDCASH",
-      "memo": "order_id: b9ac1813-8f08-4383-a819-60ec9c2665ab",
-      "timestamp": "2026-10-15 20:27 (UTC+5)",
-      "timestamp_sort": "2026-10-15T15:27:00.000",
-      "trx_id": "13f6c97a39e107f16951c17290eb7fd90805abbf0cdbf6154b86d82a1e9c0577",
-      "seq_for_address": 1,
-      "expected_price": 276.91,
-      "price_diff": -260.394,
+      "expected_price": 249.5403,
+      "price_diff": -209.1403,
       "suspicious": true
     },
     {
@@ -121,8 +107,8 @@
       "timestamp_sort": "2026-10-15T17:55:24.000",
       "trx_id": "ad02d6ac09200a882e844243b82be11e847ecbce7d23a22be3fa2bc698f0aede",
       "seq_for_address": 1,
-      "expected_price": 275.426,
-      "price_diff": -260.449,
+      "expected_price": 275.412,
+      "price_diff": -260.435,
       "suspicious": true
     },
     {
@@ -135,8 +121,8 @@
       "timestamp_sort": "2026-10-15T18:25:07.500",
       "trx_id": "bac45d62503bac972ff0a2197dfe3f677df4dbf4e7bafff575062b0da78e8385",
       "seq_for_address": 1,
-      "expected_price": 275.1288,
-      "price_diff": -260.4518,
+      "expected_price": 275.1148,
+      "price_diff": -260.4378,
       "suspicious": true
     },
     {
@@ -149,8 +135,8 @@
       "timestamp_sort": "2026-10-15T18:41:27.500",
       "trx_id": "8902c71245001d41b3f66f68c9c8c3c77aa9562868ca525cdbeecfc0e82f3d67",
       "seq_for_address": 1,
-      "expected_price": 274.9654,
-      "price_diff": -260.4634,
+      "expected_price": 274.9514,
+      "price_diff": -260.4494,
       "suspicious": true
     },
     {
@@ -163,8 +149,8 @@
       "timestamp_sort": "2026-10-15T18:57:39.000",
       "trx_id": "304f8f94d9f24c68af70364e71127708af6bdabacd4bf6263ec09d128d1aeba0",
       "seq_for_address": 1,
-      "expected_price": 274.8035,
-      "price_diff": -260.4665,
+      "expected_price": 274.7895,
+      "price_diff": -260.4525,
       "suspicious": true
     },
     {
@@ -177,8 +163,8 @@
       "timestamp_sort": "2026-10-15T19:14:36.500",
       "trx_id": "99238bbdf3dcc558e31cfd4ecdbe3eb53a05a6ec0b35d73d02f91950e342bb19",
       "seq_for_address": 1,
-      "expected_price": 274.6339,
-      "price_diff": -260.4729,
+      "expected_price": 274.6199,
+      "price_diff": -260.4589,
       "suspicious": true
     },
     {
@@ -191,8 +177,8 @@
       "timestamp_sort": "2026-10-15T19:34:09.500",
       "trx_id": "0a42d83f0e236b5851cf29f5728f4f3485b8a43f8c1ce8b696fadf296674e322",
       "seq_for_address": 1,
-      "expected_price": 274.4384,
-      "price_diff": -260.4734,
+      "expected_price": 274.4244,
+      "price_diff": -260.4594,
       "suspicious": true
     },
     {
@@ -205,8 +191,8 @@
       "timestamp_sort": "2026-10-15T20:34:58.500",
       "trx_id": "0153db23cf2afa9180933b38da625efe4162977e88f5823932e105e5964c3c8f",
       "seq_for_address": 1,
-      "expected_price": 273.8302,
-      "price_diff": -260.4962,
+      "expected_price": 273.8163,
+      "price_diff": -260.4823,
       "suspicious": true
     },
     {
@@ -219,8 +205,8 @@
       "timestamp_sort": "2026-10-15T20:45:23.000",
       "trx_id": "36421de24a6ac389d207447128c2c3beaf927815bcfde32f54a981fa2da01cd5",
       "seq_for_address": 1,
-      "expected_price": 273.7262,
-      "price_diff": -260.4952,
+      "expected_price": 273.7122,
+      "price_diff": -260.4812,
       "suspicious": true
     },
     {
@@ -233,8 +219,8 @@
       "timestamp_sort": "2026-10-15T20:51:22.000",
       "trx_id": "6aa9bd8c48136b4342eee8547ec2efdb65006905bf3d4a033814d463736b1d44",
       "seq_for_address": 1,
-      "expected_price": 273.6663,
-      "price_diff": -260.5073,
+      "expected_price": 273.6523,
+      "price_diff": -260.4933,
       "suspicious": true
     },
     {
@@ -247,8 +233,8 @@
       "timestamp_sort": "2026-10-15T21:05:31.000",
       "trx_id": "b754ec7e59be2eb8aafeea149b4d3a53971ebab98dbda8f6a91c667d67846aaa",
       "seq_for_address": 1,
-      "expected_price": 273.5248,
-      "price_diff": -260.5108,
+      "expected_price": 273.5108,
+      "price_diff": -260.4968,
       "suspicious": true
     },
     {
@@ -261,8 +247,8 @@
       "timestamp_sort": "2026-10-15T21:07:29.000",
       "trx_id": "49876f0be1a39d22b2818872e1eda9cc1266db0a1e0c05c4b3ed78164c365040",
       "seq_for_address": 1,
-      "expected_price": 273.5052,
-      "price_diff": -260.5112,
+      "expected_price": 273.4912,
+      "price_diff": -260.4972,
       "suspicious": true
     },
     {
@@ -275,8 +261,8 @@
       "timestamp_sort": "2026-10-15T21:23:50.000",
       "trx_id": "e7bc0192538b797ae81f00150ba6f7b65aee4e6ba28c31e15a35906f60ff9196",
       "seq_for_address": 1,
-      "expected_price": 273.3417,
-      "price_diff": -260.4927,
+      "expected_price": 273.3277,
+      "price_diff": -260.4787,
       "suspicious": true
     },
     {
@@ -289,8 +275,8 @@
       "timestamp_sort": "2026-10-15T21:33:46.500",
       "trx_id": "0c533750fcb40ab4f8bb42f15f5b48efac95bfbf461e2b01cf85e56e7ecd68d1",
       "seq_for_address": 1,
-      "expected_price": 273.2423,
-      "price_diff": -260.5073,
+      "expected_price": 273.2283,
+      "price_diff": -260.4933,
       "suspicious": true
     },
     {
@@ -303,8 +289,8 @@
       "timestamp_sort": "2026-10-16T00:27:39.000",
       "trx_id": "093385f0559a4abb296696278fd5ec1772047bfe1f95bc89803f7675c82327dc",
       "seq_for_address": 1,
-      "expected_price": 271.5035,
-      "price_diff": -260.5755,
+      "expected_price": 271.4895,
+      "price_diff": -260.5615,
       "suspicious": true
     },
     {
@@ -317,8 +303,8 @@
       "timestamp_sort": "2026-10-16T01:34:55.500",
       "trx_id": "492d0b6b49eb9bf3064d5a0f3c1b2c4dbce1f5bb420f802e58088683030d16bd",
       "seq_for_address": 1,
-      "expected_price": 270.8308,
-      "price_diff": -260.5958,
+      "expected_price": 270.8168,
+      "price_diff": -260.5818,
       "suspicious": true
     }
   ]
