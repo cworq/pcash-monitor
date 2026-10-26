@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-10-26 14:40:25 (UTC+5)",
-  "period_start": "2026-10-19 14:40 (UTC+5)",
-  "period_end": "2026-10-26 14:40 (UTC+5)",
+  "generated_at": "2026-10-26 14:45:28 (UTC+5)",
+  "period_start": "2026-10-19 14:45 (UTC+5)",
+  "period_end": "2026-10-26 14:45 (UTC+5)",
   "endpoint": "https://hyperion.paycash.online",
   "error": null,
   "total_raw_count": 4,
   "unique_addresses": 4,
   "suspicious_count": 4,
   "remainder_count": 0,
-  "current_auction_price": 106.414,
+  "current_auction_price": 106.35,
   "top_group_size": 24,
   "second_group_size": 96,
   "suspicious_threshold": 2.0,
@@ -23,8 +23,8 @@
       "timestamp_sort": "2026-10-19T12:47:55.500",
       "trx_id": "43926b5be6bc7e08aba3dab6b8da16b8c765357d80dd5432f05ef78385f505f2",
       "seq_for_address": 1,
-      "expected_price": 205.3448,
-      "price_diff": -150.5548,
+      "expected_price": 205.3308,
+      "price_diff": -150.5408,
       "suspicious": true
     },
     {
@@ -37,8 +37,8 @@
       "timestamp_sort": "2026-10-26T09:35:28.500",
       "trx_id": "184b01874e3bd01807b31992bc2e24503fef65d7c0c8c2d7a84c2cfc801ea081",
       "seq_for_address": 1,
-      "expected_price": 106.4693,
-      "price_diff": -54.2793,
+      "expected_price": 106.4552,
+      "price_diff": -54.2652,
       "suspicious": true
     },
     {
@@ -51,8 +51,8 @@
       "timestamp_sort": "2026-10-20T13:32:38.000",
       "trx_id": "ffef00a8e1ef14db77fcfad8290c28014d4e9af292f8dc57aa527d94195088af",
       "seq_for_address": 1,
-      "expected_price": 190.4977,
-      "price_diff": -149.5077,
+      "expected_price": 190.4837,
+      "price_diff": -149.4937,
       "suspicious": true
     },
     {
@@ -65,8 +65,8 @@
       "timestamp_sort": "2026-10-19T10:32:58.000",
       "trx_id": "a6baafb5f7bde3023c7516c7ad3ec7f841ecba2ce2195a8e5025eeaa2609cd76",
       "seq_for_address": 1,
-      "expected_price": 206.6943,
-      "price_diff": -166.2043,
+      "expected_price": 206.6803,
+      "price_diff": -166.1903,
       "suspicious": true
     }
   ]
